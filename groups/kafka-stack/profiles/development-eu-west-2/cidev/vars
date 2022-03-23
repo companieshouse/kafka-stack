@@ -1,0 +1,4 @@
+account_name = "development"
+environment = "cidev"
+route53_available = true
+ssh_keyname = "chs-cidev"
