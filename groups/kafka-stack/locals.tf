@@ -5,6 +5,9 @@ locals {
   automation_subnets = values(data.aws_subnet.automation)
   kafka_zookeeper_connect_string = join(",", formatlist("%s:2181", module.zookeeper.instance_ips))
   placement_subnets = values(data.aws_subnet.placement)
+  placement_subnets_by_availability_zone = {
+    for subnet in data.aws_subnet.placement : subnet.availability_zone => subnet
+  }
   secrets = data.vault_generic_secret.secrets.data
 
   ssh_access = {
@@ -45,12 +48,9 @@ locals {
     local.placement_subnets.*.cidr_block
   ))
 
-  placement_subnet_ids = values(zipmap(
-    local.placement_subnets.*.availability_zone,
-    local.placement_subnets.*.id
-  ))
-
   # ----------------------------------------------------------------------------
+
+  debug = {}
 
   kafka_broker_access = {
     cidr_blocks: concat(
