@@ -1,17 +1,18 @@
-# kafka-stack
+# kafka-stack-configuration
 
-Terraform scripts for provisioning a Kafka cluster
+## Introduction
 
-## Applying infrastructure changes
+These scripts are used to configure the kafka stack
 
-These scripts should be run using Companies House Terraform-runner
+## Roles
 
-View usage instructions for the terraform-runner [here](https://companieshouse.atlassian.net/wiki/spaces/DEVOPS/pages/1694236886/Terraform-runner)
+- Grafana - Configure Grafana using the API
 
-## Groups
+### Grafana Role
 
-This repository comprises the following groups
+Makes requests against the Grafana API to manage an environments space and its index patterns.
+If an environment has not been defined within this role it will be removed from the kafka-stack.
 
-| Name                                        | Description                |
-| ------------------------------------------- | -------------------------- |
-| [kafka-stack](groups/kafka-stack/README.md) | Provisions a Kafka cluster |
+## Running
+
+The playbooks are invoked through the `ansible-runner`.

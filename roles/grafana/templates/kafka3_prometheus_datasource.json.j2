@@ -1,0 +1,7 @@
+{
+  "name":"kafka3-{{ item.environment }}",
+  "type":"prometheus",
+  "url":"https://kafka3-{{ item.environment }}-prometheus.{{ item.dns_zone_name }}",
+  "access":"Browser",
+  "basicAuth":false
+}
