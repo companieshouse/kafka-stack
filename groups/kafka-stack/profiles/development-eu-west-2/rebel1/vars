@@ -1,4 +1,0 @@
-account_name = "development"
-environment = "rebel1"
-route53_available = true
-ssh_keyname = "chs-rebel1"
