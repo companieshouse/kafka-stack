@@ -89,6 +89,12 @@ variable "zookeeper_ami_version_pattern" {
   type        = string
 }
 
+variable "zookeeper_heap_mb" {
+  default     = 512
+  description = "The heap memory in MB to assign"
+  type        = number
+}
+
 variable "zookeeper_instance_count" {
   default     = 1
   description = "The number of zookeeper instances to provision"

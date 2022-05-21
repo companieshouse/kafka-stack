@@ -57,5 +57,6 @@ module "zookeeper" {
   team                    = var.team
   vpc_id                  = local.vpc_id
   zookeeper_client_access = local.zookeeper_client_access
+  zookeeper_heap_mb       = var.zookeeper_heap_mb
   zookeeper_peer_access   = local.zookeeper_peer_access
 }
