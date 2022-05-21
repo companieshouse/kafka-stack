@@ -1,4 +1,6 @@
 account_name = "development"
 environment = "rebel1"
+kafka_ami_version_pattern = "0.1.0"
 route53_available = true
 ssh_keyname = "chs-rebel1"
+zookeeper_ami_version_pattern = "1.0.6"
