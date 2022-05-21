@@ -1,4 +1,6 @@
 account_name = "development"
 environment = "cidev"
+kafka_ami_version_pattern = "0.1.0"
 route53_available = true
 ssh_keyname = "chs-cidev"
+zookeeper_ami_version_pattern = "1.0.6"
