@@ -11,7 +11,7 @@ terraform {
 }
 
 module "kafka" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.132"
+  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.134"
 
   depends_on = [
     module.zookeeper
@@ -27,6 +27,7 @@ module "kafka" {
   kafka_broker_access             = local.kafka_broker_access
   kafka_zookeeper_connect_string  = local.kafka_zookeeper_connect_string
   lvm_block_definitions           = var.kafka_lvm_block_definitions
+  prometheus_access               = local.prometheus_access
   root_volume_size_gib            = var.kafka_root_volume_size_gib
   route53_available               = var.route53_available
   service                         = var.service
@@ -39,7 +40,7 @@ module "kafka" {
 }
 
 module "zookeeper" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/zookeeper?ref=tags/1.0.132"
+  source = "git@github.com:companieshouse/terraform-modules//aws/zookeeper?ref=tags/1.0.134"
 
   ami_owner_id                = local.zookeeper_ami_owner_id
   debug                       = var.debug
@@ -49,6 +50,7 @@ module "zookeeper" {
   environment                 = var.environment
   instance_specifications     = var.zookeeper_instance_specifications
   lvm_block_definitions       = var.zookeeper_lvm_block_definitions
+  prometheus_access           = local.prometheus_access
   root_volume_size_gib        = var.zookeeper_root_volume_size_gib
   route53_available           = var.route53_available
   service                     = var.service

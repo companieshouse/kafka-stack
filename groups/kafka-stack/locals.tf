@@ -63,6 +63,15 @@ locals {
     ]
   }
 
+  prometheus_access = {
+    cidr_blocks: concat(
+      local.placement_subnet_cidrs
+    )
+    list_ids: [
+      data.aws_ec2_managed_prefix_list.administration.id
+    ]
+  }
+
   zookeeper_client_access = {
     cidr_blocks: local.placement_subnet_cidrs,
     list_ids: [
