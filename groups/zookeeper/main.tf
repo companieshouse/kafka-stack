@@ -11,7 +11,7 @@ terraform {
 }
 
 module "zookeeper" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/kafka-zookeeper?ref=tags/1.0.139"
+  source = "git@github.com:companieshouse/terraform-modules//aws/kafka-zookeeper?ref=tags/1.0.141"
 
   ami_owner_id                = local.ami_owner_id
   cmak_access                 = local.cmak_access
@@ -20,10 +20,12 @@ module "zookeeper" {
   debug                       = var.debug
   default_ami_version_pattern = var.default_ami_version_pattern
   default_instance_type       = var.default_instance_type
+  dns_server_ip               = local.dns_server_ip
   dns_zone_name               = local.dns_zone_name
   environment                 = var.environment
   instance_specifications     = var.instance_specifications
   lvm_block_definitions       = var.lvm_block_definitions
+  ns_update_key_content       = local.ns_update_key_content
   prometheus_access           = local.prometheus_access
   root_volume_size_gib        = var.root_volume_size_gib
   route53_available           = var.route53_available
