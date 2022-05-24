@@ -2,6 +2,12 @@ data "aws_ec2_managed_prefix_list" "administration" {
   name = "administration-cidr-ranges"
 }
 
+data "aws_instance" "zookeepers" {
+  for_each = toset(data.aws_instances.zookeepers.ids)
+
+  instance_id = each.value
+}
+
 data "aws_instances" "zookeepers" {
   instance_tags = {
     Environment     = var.environment

@@ -3,7 +3,7 @@ locals {
   account_ids = data.vault_generic_secret.account_ids.data
   applications_subnets = values(data.aws_subnet.applications)
   automation_subnets = values(data.aws_subnet.automation)
-  kafka_zookeeper_connect_string = join(",", formatlist("%s:2181", data.aws_instances.zookeepers.private_ips))
+  zookeeper_hostnames = sort(values(data.aws_instance.zookeepers).*.tags.HostName)
   placement_subnets = values(data.aws_subnet.placement)
   placement_subnets_by_availability_zone = {
     for subnet in data.aws_subnet.placement : subnet.availability_zone => subnet
@@ -27,6 +27,7 @@ locals {
   automation_subnet_pattern = local.secrets.automation_subnet_pattern
   automation_vpc_pattern = local.secrets.automation_vpc_pattern
   dns_zone_name = local.secrets.dns_zone_name
+  kafka_zookeeper_connect_string = join(",", formatlist("%s:2181", local.zookeeper_hostnames))
   placement_subnet_pattern = local.secrets.placement_subnet_pattern
   placement_vpc_pattern = local.secrets.placement_vpc_pattern
 
