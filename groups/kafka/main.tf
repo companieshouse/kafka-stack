@@ -11,18 +11,20 @@ terraform {
 }
 
 module "kafka" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.139"
+  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.142"
 
   ami_owner_id                    = local.ami_owner_id
   debug                           = var.debug
   default_ami_version_pattern     = var.default_ami_version_pattern
   default_instance_type           = var.default_instance_type
+  dns_server_ip                   = local.dns_server_ip
   dns_zone_name                   = local.dns_zone_name
   environment                     = var.environment
   instance_specifications         = var.instance_specifications
   kafka_broker_access             = local.kafka_broker_access
   kafka_zookeeper_connect_string  = local.kafka_zookeeper_connect_string
   lvm_block_definitions           = var.lvm_block_definitions
+  ns_update_key_content           = local.ns_update_key_content
   prometheus_access               = local.prometheus_access
   root_volume_size_gib            = var.root_volume_size_gib
   route53_available               = var.route53_available

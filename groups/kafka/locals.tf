@@ -26,8 +26,10 @@ locals {
   applications_vpc_pattern = local.secrets.applications_vpc_pattern
   automation_subnet_pattern = local.secrets.automation_subnet_pattern
   automation_vpc_pattern = local.secrets.automation_vpc_pattern
+  dns_server_ip = local.secrets.dns_server_ip
   dns_zone_name = local.secrets.dns_zone_name
   kafka_zookeeper_connect_string = join(",", formatlist("%s:2181", local.zookeeper_hostnames))
+  ns_update_key_content = local.secrets.ns_update_key_content
   placement_subnet_pattern = local.secrets.placement_subnet_pattern
   placement_vpc_pattern = local.secrets.placement_vpc_pattern
 
