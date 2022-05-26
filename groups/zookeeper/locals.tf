@@ -24,6 +24,7 @@ locals {
 
   # ----------------------------------------------------------------------------
 
+  ami_owner_id = local.secrets.zookeeper_ami_owner_id
   cmak_password = local.secrets.cmak_password
   cmak_username = local.secrets.cmak_username
   dns_server_ip = local.secrets.dns_server_ip
@@ -31,7 +32,6 @@ locals {
   ns_update_key_content = local.secrets.ns_update_key_content
   placement_subnet_pattern = local.secrets.placement_subnet_pattern
   placement_vpc_pattern = local.secrets.placement_vpc_pattern
-  ami_owner_id = local.secrets.zookeeper_ami_owner_id
 
   # ----------------------------------------------------------------------------
 
