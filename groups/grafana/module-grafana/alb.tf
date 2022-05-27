@@ -18,7 +18,7 @@ resource "aws_lb" "grafana" {
   internal                   = true
   load_balancer_type         = "application"
   security_groups            = [aws_security_group.grafana_load_balancer.id]
-  subnets                    = var.placement_subnet_ids
+  subnets                    = var.subnet_ids
   enable_deletion_protection = false
 
   tags = {

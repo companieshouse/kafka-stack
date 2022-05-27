@@ -4,11 +4,13 @@ resource "aws_security_group" "prometheus" {
   vpc_id = var.vpc_id
 
   ingress {
-    description = "Inbound SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = var.ssh_cidrs
+    description     = "Inbound SSH"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    cidr_blocks     = var.ssh_access.cidr_blocks
+    prefix_list_ids = var.ssh_access.list_ids
+    security_groups = var.ssh_access.security_group_ids
   }
 
   ingress {
@@ -16,7 +18,9 @@ resource "aws_security_group" "prometheus" {
     from_port   = 9090
     to_port     = 9090
     protocol    = "tcp"
-    security_groups = [aws_security_group.prometheus_load_balancer.id]
+    security_groups = [
+      aws_security_group.prometheus_load_balancer.id
+    ]
   }
 
   egress {
@@ -45,7 +49,9 @@ resource "aws_security_group" "prometheus_load_balancer" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = var.prometheus_cidrs
+    cidr_blocks     = var.prometheus_access.cidr_blocks
+    prefix_list_ids = var.prometheus_access.list_ids
+    security_groups = var.prometheus_access.security_group_ids
   }
 
   egress {
