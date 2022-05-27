@@ -18,7 +18,7 @@ resource "aws_lb" "prometheus" {
   internal                   = true
   load_balancer_type         = "application"
   security_groups            = [aws_security_group.prometheus_load_balancer.id]
-  subnets                    = var.placement_subnet_ids
+  subnets                    = var.subnet_ids
   enable_deletion_protection = false
 
   tags = {

@@ -13,11 +13,6 @@ variable "certificate_arn" {
   type        = string
 }
 
-variable "discovery_availability_zones" {
-  description = "A list of availability zones in which to search for master nodes"
-  type        = string
-}
-
 variable "dns_zone_name" {
   description = "The name of the DNS zone we're using"
   type        = string
@@ -48,14 +43,18 @@ variable "lvm_block_devices" {
   }))
 }
 
-variable "placement_subnet_ids" {
-  description = "The ids of the subnets into which we'll place prometheus instances"
-  type = list(string)
-}
-
-variable "prometheus_cidrs" {
-  description = "A list of CIDR blocks to permit prometheus access from"
-  type        = list(string)
+variable "prometheus_access" {
+  default = {
+    cidr_blocks: [],
+    list_ids: [],
+    security_group_ids: []
+  }
+  description = "An object defining CIDR blocks and prefix list ids controlling access to Prometheus"
+  type = object({
+    cidr_blocks: list(string),
+    list_ids: list(string),
+    security_group_ids: list(string)
+  })
 }
 
 variable "prometheus_metrics_port" {
@@ -93,9 +92,18 @@ variable "service" {
   type        = string
 }
 
-variable "ssh_cidrs" {
-  description = "The SSH of the CIDR to be used"
-  type = list(string)
+variable "ssh_access" {
+  default = {
+    cidr_blocks: [],
+    list_ids: [],
+    security_group_ids: []
+  }
+  description = "An object defining CIDR blocks and prefix list ids controlling access to SSH"
+  type = object({
+    cidr_blocks: list(string),
+    list_ids: list(string),
+    security_group_ids: list(string)
+  })
 }
 
 variable "ssh_keyname" {
