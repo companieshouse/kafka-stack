@@ -23,14 +23,23 @@ variable "environment" {
   type        = string
 }
 
+variable "grafana_access" {
+  default = {
+    cidr_blocks: [],
+    list_ids: [],
+    security_group_ids: []
+  }
+  description = "An object defining CIDR blocks and prefix list ids controlling access to Grafana"
+  type = object({
+    cidr_blocks: list(string),
+    list_ids: list(string),
+    security_group_ids: list(string)
+  })
+}
+
 variable "grafana_admin_password" {
   description = "The Grafana admin password used if LDAP connectivity is unavailable"
   type        = string
-}
-
-variable "grafana_cidrs" {
-  description = "A list of CIDR blocks to permit grafana access from"
-  type        = list(string)
 }
 
 variable "grafana_service_group" {
@@ -143,9 +152,18 @@ variable "service" {
   type        = string
 }
 
-variable "ssh_cidrs" {
-  description = "The SSH of the CIDR to be used"
-  type = list(string)
+variable "ssh_access" {
+  default = {
+    cidr_blocks: [],
+    list_ids: [],
+    security_group_ids: []
+  }
+  description = "An object defining CIDR blocks and prefix list ids controlling access to SSH"
+  type = object({
+    cidr_blocks: list(string),
+    list_ids: list(string),
+    security_group_ids: list(string)
+  })
 }
 
 variable "ssh_keyname" {

@@ -1,9 +1,13 @@
-provider "aws" {
-  region  = var.region
-  version = "~> 2.0"
-}
-
 terraform {
+  required_version = ">= 0.13.0, < 0.14"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 3.0, < 4.0"
+    }
+  }
+
   backend "s3" {}
 }
 
@@ -17,7 +21,7 @@ module "grafana" {
   environment                   = var.environment
   instance_count                = var.grafana_instance_count
   instance_type                 = var.grafana_instance_type
-  grafana_cidrs                 = local.grafana_cidrs
+  grafana_access                = local.grafana_access
   grafana_service_group         = var.grafana_service_group
   grafana_service_user          = var.grafana_service_user
   grafana_admin_password        = local.grafana_admin_password
@@ -38,9 +42,9 @@ module "grafana" {
   root_volume_size              = var.grafana_root_volume_size
   route53_available             = local.route53_available
   service                       = var.service
-  ssh_cidrs                     = local.administration_cidrs
+  ssh_access                    = local.ssh_access
   ssh_keyname                   = local.ssh_keyname
-  subnet_ids                    = local.placement_subnet_ids_by_availability_zone
+  subnet_ids                    = local.placement_subnet_ids
   user_data_merge_strategy      = var.user_data_merge_strategy
-  vpc_id                        = data.aws_vpc.vpc.id
+  vpc_id                        = data.aws_vpc.placement.id
 }
