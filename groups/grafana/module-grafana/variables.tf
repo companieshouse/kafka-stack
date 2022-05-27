@@ -127,11 +127,6 @@ variable "lvm_block_devices" {
   }))
 }
 
-variable "placement_subnet_ids" {
-  description = "The ids of the subnets into which we'll place grafana instances"
-  type = list(string)
-}
-
 variable "region" {
   description = "The AWS region in which resources will be administered"
   type        = string

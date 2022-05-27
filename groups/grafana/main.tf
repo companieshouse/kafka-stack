@@ -37,7 +37,6 @@ module "grafana" {
   ldap_grafana_admin_group_dn   = local.ldap_grafana_admin_group_dn
   ldap_grafana_viewer_group_dn  = local.ldap_grafana_viewer_group_dn
   lvm_block_devices             = var.grafana_lvm_block_devices
-  placement_subnet_ids          = data.aws_subnet_ids.placement.ids
   region                        = var.region
   root_volume_size              = var.grafana_root_volume_size
   route53_available             = local.route53_available
