@@ -9,44 +9,6 @@ variable "debug" {
   type        = bool
 }
 
-variable "environment" {
-  description = "The environment name to be used when creating AWS resources"
-  type        = string
-}
-
-variable "region" {
-  description = "The AWS region in which resources will be created"
-  type        = string
-}
-
-variable "repository_name" {
-  default     = "kafka-stack"
-  description = "The name of the repository in which we're operating"
-  type        = string
-}
-
-variable "route53_available" {
-  description = "A flag indicating whether Route53 is available"
-  type        = bool
-}
-
-variable "service" {
-  default     = "kafka3"
-  description = "The service name to be used when creating AWS resources"
-  type        = string
-}
-
-variable "ssh_keyname" {
-  description = "The SSH keypair name to use for remote connectivity"
-  type        = string
-}
-
-variable "team" {
-  default     = "platform"
-  description = "The team responsible for administering the instance"
-  type        = string
-}
-
 variable "default_ami_version_pattern" {
   default =   "\\d.\\d.\\d"
   description = "The default AMI version pattern to use when matching AMIs for instances"
@@ -59,10 +21,9 @@ variable "default_instance_type" {
   type        = string
 }
 
-variable "zookeeper_heap_mb" {
-  default     = 512
-  description = "The heap memory in MB to assign"
-  type        = number
+variable "environment" {
+  description = "The environment name to be used when creating AWS resources"
+  type        = string
 }
 
 variable "instance_specifications" {
@@ -88,8 +49,42 @@ variable "lvm_block_definitions" {
   }))
 }
 
+variable "region" {
+  description = "The AWS region in which resources will be created"
+  type        = string
+}
+
+variable "repository_name" {
+  default     = "kafka-stack"
+  description = "The name of the repository in which we're operating"
+  type        = string
+}
+
 variable "root_volume_size_gib" {
   default     = 50
   description = "The size of the zookeeper root volume in GiB; set this value to 0 to preserve the size specified in the AMI metadata. This value should not be smaller than the size specified in the AMI metadata and used by the root volume snapshot. The filesystem will be expanded automatically to use all available space for the volume and an XFS filesystem is assumed"
+  type        = number
+}
+
+variable "route53_available" {
+  description = "A flag indicating whether Route53 is available"
+  type        = bool
+}
+
+variable "service" {
+  default     = "kafka3"
+  description = "The service name to be used when creating AWS resources"
+  type        = string
+}
+
+variable "team" {
+  default     = "platform"
+  description = "The team responsible for administering the instance"
+  type        = string
+}
+
+variable "zookeeper_heap_mb" {
+  default     = 512
+  description = "The heap memory in MB to assign"
   type        = number
 }
