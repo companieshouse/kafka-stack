@@ -77,11 +77,6 @@ variable "service" {
   type        = string
 }
 
-variable "ssh_keyname" {
-  description = "The SSH keypair name to use for remote connectivity"
-  type        = string
-}
-
 variable "team" {
   default     = "platform"
   description = "The team responsible for administering the instance"

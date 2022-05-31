@@ -16,6 +16,18 @@ data "aws_instances" "zookeepers" {
   }
 }
 
+data "aws_key_pair" "kafka_stack" {
+  filter {
+    name   = "tag:Environment"
+    values = [var.environment]
+  }
+
+  filter {
+    name   = "tag:Service"
+    values = [var.service]
+  }
+}
+
 data "vault_generic_secret" "account_ids" {
   path = "aws-accounts/account-ids"
 }

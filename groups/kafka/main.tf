@@ -31,7 +31,7 @@ module "kafka" {
   service                         = var.service
   service_sub_type                = "kafka"
   ssh_access                      = local.ssh_access
-  ssh_keyname                     = var.ssh_keyname
+  ssh_keyname                     = local.ssh_keyname
   subnets                         = local.placement_subnets_by_availability_zone
   team                            = var.team
   vpc_id                          = local.vpc_id
