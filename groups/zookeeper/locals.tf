@@ -20,6 +20,8 @@ locals {
     ]
   }
 
+  ssh_keyname = data.aws_key_pair.kafka_stack.key_name
+
   vpc_id = data.aws_vpc.placement.id
 
   # ----------------------------------------------------------------------------
