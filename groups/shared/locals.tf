@@ -1,6 +1,5 @@
 locals {
 
-
   secrets = data.vault_generic_secret.secrets.data
 
   # ----------------------------------------------------------------------------
