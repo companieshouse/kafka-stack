@@ -1,0 +1,16 @@
+account_name = "development"
+environment = "common"
+
+instance_specifications = {
+  "eu-west-2a" = {
+    "1" = {}
+  }
+  "eu-west-2b" = {
+    "2" = {}
+  }
+  "eu-west-2c" = {
+    "3" = {}
+  }
+}
+
+route53_available = true
