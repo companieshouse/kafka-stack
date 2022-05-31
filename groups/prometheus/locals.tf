@@ -22,6 +22,8 @@ locals {
     security_group_ids: []
   }
 
+  ssh_keyname = data.aws_key_pair.kafka_stack.key_name
+
 # ----------------------------------------------------------------------------
 
   certificate_arn = lookup(local.secrets, "certificate_arn", null)
@@ -40,6 +42,5 @@ locals {
   }
 
   route53_available = local.secrets.route53_available
-  ssh_keyname = local.secrets.ssh_keyname
 
 }
