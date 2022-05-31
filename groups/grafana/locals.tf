@@ -22,6 +22,8 @@ locals {
     security_group_ids: []
   }
 
+  ssh_keyname = data.aws_key_pair.kafka_stack.key_name
+
   # ----------------------------------------------------------------------------
 
   automation_subnet_pattern = local.secrets.automation_subnet_pattern
@@ -40,7 +42,6 @@ locals {
   placement_subnet_name_patterns = jsondecode(local.secrets.placement_subnet_name_patterns)
   placement_vpc_pattern = local.secrets.placement_vpc_pattern
   route53_available = local.secrets.route53_available
-  ssh_keyname = local.secrets.ssh_keyname
 
   # ----------------------------------------------------------------------------
 
