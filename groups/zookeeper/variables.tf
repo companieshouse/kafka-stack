@@ -3,6 +3,15 @@ variable "account_name" {
   type        = string
 }
 
+variable "cmak_basic_authentication" {
+  default     = null
+  description = "An object containing basic authentication credentials"
+  type        = object({
+    password: string,
+    username: string,
+  })
+}
+
 variable "debug" {
   default     = false
   description = "A flag indicating whether to output additional debug level information"
