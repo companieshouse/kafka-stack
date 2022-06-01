@@ -27,6 +27,7 @@ locals {
   # ----------------------------------------------------------------------------
 
   ami_owner_id = local.secrets.zookeeper_ami_owner_id
+  certificate_arn = lookup(local.secrets, "certificate_arn", null)
   cmak_password = local.secrets.cmak_password
   cmak_username = local.secrets.cmak_username
   dns_server_ip = local.secrets.dns_server_ip
