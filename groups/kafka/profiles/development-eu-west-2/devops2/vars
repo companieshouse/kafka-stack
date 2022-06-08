@@ -1,0 +1,31 @@
+account_name = "development"
+environment = "devops2"
+
+instance_specifications = {
+  "eu-west-2a" = {
+    "1" = {
+      ami_version_pattern = "feature"
+    }
+  }
+  "eu-west-2b" = {
+    "2" = {
+      ami_version_pattern = "feature"
+    }
+  }
+  "eu-west-2c" = {
+    "3" = {
+      ami_version_pattern = "feature"
+    }
+  }
+}
+
+lvm_block_definitions = [
+  {
+    aws_volume_size_gb: "100",
+    filesystem_resize_tool: "xfs_growfs",
+    lvm_logical_volume_device_node: "/dev/kafka/data",
+    lvm_physical_volume_device_node: "/dev/xvdb"
+  }
+]
+
+route53_available = true
