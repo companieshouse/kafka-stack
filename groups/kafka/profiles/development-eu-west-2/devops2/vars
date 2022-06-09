@@ -3,19 +3,13 @@ environment = "devops2"
 
 instance_specifications = {
   "eu-west-2a" = {
-    "1" = {
-      ami_version_pattern = "feature"
-    }
+    "1" = {}
   }
   "eu-west-2b" = {
-    "2" = {
-      ami_version_pattern = "feature"
-    }
+    "2" = {}
   }
   "eu-west-2c" = {
-    "3" = {
-      ami_version_pattern = "feature"
-    }
+    "3" = {}
   }
 }
 
