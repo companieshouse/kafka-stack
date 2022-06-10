@@ -83,9 +83,7 @@ locals {
     cidr_blocks: concat(
       local.placement_subnet_cidrs
     )
-    list_ids: [
-      data.aws_ec2_managed_prefix_list.administration.id
-    ]
+    list_ids: []
   }
 
 }

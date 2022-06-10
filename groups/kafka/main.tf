@@ -11,7 +11,7 @@ terraform {
 }
 
 module "kafka" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.143"
+  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.158"
 
   ami_owner_id                    = local.ami_owner_id
   debug                           = var.debug
@@ -21,6 +21,7 @@ module "kafka" {
   dns_zone_name                   = local.dns_zone_name
   environment                     = var.environment
   instance_specifications         = var.instance_specifications
+  instance_template_path          = "${path.root}/instance-templates/kafka"
   kafka_broker_access             = local.kafka_broker_access
   kafka_zookeeper_connect_string  = local.kafka_zookeeper_connect_string
   lvm_block_definitions           = var.lvm_block_definitions
