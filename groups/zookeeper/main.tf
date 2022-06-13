@@ -11,7 +11,7 @@ terraform {
 }
 
 module "zookeeper" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/kafka-zookeeper?ref=tags/1.0.147"
+  source = "git@github.com:companieshouse/terraform-modules//aws/kafka-zookeeper?ref=tags/1.0.159"
 
   ami_owner_id                = local.ami_owner_id
   certificate_arn             = local.certificate_arn

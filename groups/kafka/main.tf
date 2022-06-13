@@ -11,7 +11,7 @@ terraform {
 }
 
 module "kafka" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.158"
+  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.159"
 
   ami_owner_id                    = local.ami_owner_id
   debug                           = var.debug
