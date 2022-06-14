@@ -17,6 +17,7 @@ module "grafana" {
   ami_owner_id                  = var.ami_owner_id
   ami_version_pattern           = var.grafana_ami_version_pattern
   certificate_arn               = local.certificate_arn
+  debug                         = var.debug
   dns_zone_name                 = local.dns_zone_name
   environment                   = var.environment
   instance_count                = var.grafana_instance_count
@@ -36,6 +37,7 @@ module "grafana" {
   ldap_auth_search_base_dns     = local.ldap_auth_search_base_dns
   ldap_grafana_admin_group_dn   = local.ldap_grafana_admin_group_dn
   ldap_grafana_viewer_group_dn  = local.ldap_grafana_viewer_group_dn
+  load_balancer_dns_zone_name   = local.load_balancer_dns_zone_name
   lvm_block_devices             = var.grafana_lvm_block_devices
   region                        = var.region
   root_volume_size              = var.grafana_root_volume_size

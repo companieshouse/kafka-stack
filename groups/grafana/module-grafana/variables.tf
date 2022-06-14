@@ -13,6 +13,11 @@ variable "certificate_arn" {
   type        = string
 }
 
+variable "debug" {
+  description = "A flag indicating whether to output additional debug level information"
+  type        = bool
+}
+
 variable "dns_zone_name" {
   description = "The name of the DNS zone we're using"
   type        = string
@@ -114,6 +119,11 @@ variable "ldap_grafana_admin_group_dn" {
 
 variable "ldap_grafana_viewer_group_dn" {
   description = "Ldap group used for viewing privileges"
+  type        = string
+}
+
+variable "load_balancer_dns_zone_name" {
+  description = "The name of the DNS zone we're using for the load balancer"
   type        = string
 }
 

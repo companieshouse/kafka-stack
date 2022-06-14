@@ -39,6 +39,7 @@ locals {
   ldap_auth_search_filter = local.secrets.ldap_auth_search_filter
   ldap_grafana_admin_group_dn = local.secrets.ldap_grafana_admin_group_dn
   ldap_grafana_viewer_group_dn = local.secrets.ldap_grafana_viewer_group_dn
+  load_balancer_dns_zone_name = local.secrets.load_balancer_dns_zone_name
   placement_subnet_name_patterns = jsondecode(local.secrets.placement_subnet_name_patterns)
   placement_vpc_pattern = local.secrets.placement_vpc_pattern
   route53_available = local.secrets.route53_available
