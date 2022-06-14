@@ -13,6 +13,11 @@ variable "certificate_arn" {
   type        = string
 }
 
+variable "debug" {
+  description = "A flag indicating whether to output additional debug level information"
+  type        = bool
+}
+
 variable "dns_zone_name" {
   description = "The name of the DNS zone we're using"
   type        = string
@@ -30,6 +35,11 @@ variable "instance_count" {
 
 variable "instance_type" {
   description = "The instance type to use"
+  type        = string
+}
+
+variable "load_balancer_dns_zone_name" {
+  description = "The name of the DNS zone we're using for the load balancer"
   type        = string
 }
 

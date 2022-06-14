@@ -8,6 +8,12 @@ variable "ami_owner_id" {
   description = "The ID of the AMI owner"
 }
 
+variable "debug" {
+  default     = false
+  description = "A flag indicating whether to output additional debug level information"
+  type        = bool
+}
+
 variable "environment" {
   description = "The environment name to be used when creating AWS resources"
   type        = string
