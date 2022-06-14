@@ -5,4 +5,18 @@ locals {
       block_device if block_device.device_name != data.aws_ami.grafana.root_device_name
   ]
   certificate_arn = var.route53_available ? aws_acm_certificate_validation.certificate[0].certificate_arn : var.certificate_arn
+
+  debug = {}
+  load_balancer_dns_name = "${var.service}-${var.environment}-grafana.${var.load_balancer_dns_zone_name}"
+
+  manual_dns_entries = var.route53_available ? [] : [
+    "${local.load_balancer_dns_name} -> ${aws_lb.grafana.dns_name}"
+  ]
+
+  # ----------------------------------------------------------------------------
+
+  manual_steps = {
+    dns_entries = local.manual_dns_entries
+  }
+
 }

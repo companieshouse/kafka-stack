@@ -13,7 +13,7 @@ write_files:
           static_configs:
           - targets: ['localhost:9090','localhost:9100']
 
-        - job_name: zookeeper
+        - job_name: zookeeper-node-metrics
           scrape_interval: 60s
           scrape_timeout: 30s
           metrics_path: /metrics
@@ -32,7 +32,7 @@ write_files:
             - source_labels: [__meta_ec2_private_ip]
               target_label: private_ip
 
-        - job_name: broker
+        - job_name: broker-node-metrics
           scrape_interval: 60s
           scrape_timeout: 30s
           metrics_path: /metrics
