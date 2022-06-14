@@ -16,7 +16,7 @@ module "zookeeper" {
   ami_owner_id                = local.ami_owner_id
   certificate_arn             = local.certificate_arn
   cmak_access                 = local.cmak_access
-  cmak_basic_authentication   = var.cmak_basic_authentication
+  cmak_basic_authentication   = local.cmak_basic_authentication
   debug                       = var.debug
   default_ami_version_pattern = var.default_ami_version_pattern
   default_instance_type       = var.default_instance_type
