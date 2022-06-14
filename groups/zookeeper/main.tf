@@ -11,7 +11,7 @@ terraform {
 }
 
 module "zookeeper" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/kafka-zookeeper?ref=tags/1.0.159"
+  source = "git@github.com:companieshouse/terraform-modules//aws/kafka-zookeeper?ref=tags/1.0.160"
 
   ami_owner_id                = local.ami_owner_id
   certificate_arn             = local.certificate_arn
@@ -24,6 +24,7 @@ module "zookeeper" {
   dns_zone_name               = local.dns_zone_name
   environment                 = var.environment
   instance_specifications     = var.instance_specifications
+  load_balancer_dns_zone_name = local.load_balancer_dns_zone_name
   lvm_block_definitions       = var.lvm_block_definitions
   ns_update_key_content       = local.ns_update_key_content
   prometheus_access           = local.prometheus_access
