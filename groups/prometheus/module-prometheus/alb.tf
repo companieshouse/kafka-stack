@@ -1,8 +1,8 @@
 resource "aws_acm_certificate" "certificate" {
   count                     = var.route53_available ? 1 : 0
 
-  domain_name               = "${var.service}-${var.environment}-prometheus.${var.dns_zone_name}"
-  subject_alternative_names = ["*.${var.service}-${var.environment}-prometheus.${var.dns_zone_name}"]
+  domain_name               = "${var.service}-${var.environment}-prometheus.${var.load_balancer_dns_zone_name}"
+  subject_alternative_names = ["*.${var.service}-${var.environment}-prometheus.${var.load_balancer_dns_zone_name}"]
   validation_method         = "DNS"
 }
 

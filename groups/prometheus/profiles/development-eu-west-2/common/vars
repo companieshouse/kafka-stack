@@ -12,3 +12,5 @@ prometheus_lvm_block_devices = [
 
 repository_name = "kafka-stack"
 team = "platform"
+
+debug = true

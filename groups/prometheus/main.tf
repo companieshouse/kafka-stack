@@ -17,10 +17,12 @@ module "prometheus" {
   ami_owner_id                  = var.ami_owner_id
   ami_version_pattern           = var.prometheus_ami_version_pattern
   certificate_arn               = local.certificate_arn
+  debug                         = var.debug
   dns_zone_name                 = local.dns_zone_name
   environment                   = var.environment
   instance_count                = var.prometheus_instance_count
   instance_type                 = var.prometheus_instance_type
+  load_balancer_dns_zone_name   = local.load_balancer_dns_zone_name
   prometheus_access             = local.prometheus_access
   prometheus_service_group      = var.prometheus_service_group
   prometheus_service_user       = var.prometheus_service_user
