@@ -28,8 +28,7 @@ locals {
 
   ami_owner_id = local.secrets.zookeeper_ami_owner_id
   certificate_arn = lookup(local.secrets, "certificate_arn", null)
-  cmak_password = local.secrets.cmak_password
-  cmak_username = local.secrets.cmak_username
+  cmak_basic_authentication = contains(keys(local.secrets), "cmak_basic_authentication") ? jsondecode(local.secrets.cmak_basic_authentication) : var.cmak_basic_authentication
   dns_server_ip = local.secrets.dns_server_ip
   dns_zone_name = local.secrets.dns_zone_name
   ns_update_key_content = local.secrets.ns_update_key_content
