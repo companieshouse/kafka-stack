@@ -13,24 +13,26 @@ write_files:
           static_configs:
           - targets: ['localhost:9090','localhost:9100']
 
-        - job_name: zookeeper-node-metrics
+        - job_name: broker-kafka-metrics
           scrape_interval: 60s
           scrape_timeout: 30s
           metrics_path: /metrics
           scheme: http
           ec2_sd_configs:
             - region: ${region}
-              port: ${prometheus_metrics_port}
+              port: 9308
               filters:
                 - name: tag:Environment
                   values: [${environment}]
                 - name: tag:Service
                   values: [kafka3]
                 - name: tag:ServiceSubType
-                  values: [zookeeper]
+                  values: [kafka]
           relabel_configs:
-            - source_labels: [__meta_ec2_private_ip]
-              target_label: private_ip
+            - source_labels: [__meta_ec2_tag_HostName]
+              target_label: hostname
+            - source_labels: [__meta_ec2_tag_Name]
+              target_label: name
 
         - job_name: broker-node-metrics
           scrape_interval: 60s
@@ -50,3 +52,22 @@ write_files:
           relabel_configs:
             - source_labels: [__meta_ec2_private_ip]
               target_label: private_ip
+
+        - job_name: zookeeper-node-metrics
+          scrape_interval: 60s
+          scrape_timeout: 30s
+          metrics_path: /metrics
+          scheme: http
+          ec2_sd_configs:
+            - region: ${region}
+              port: ${prometheus_metrics_port}
+              filters:
+                - name: tag:Environment
+                  values: [${environment}]
+                - name: tag:Service
+                  values: [kafka3]
+                - name: tag:ServiceSubType
+                  values: [zookeeper]
+          relabel_configs:
+            - source_labels: [__meta_ec2_tag_HostName]
+              target_label: hostname
