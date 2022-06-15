@@ -69,5 +69,5 @@ write_files:
                 - name: tag:ServiceSubType
                   values: [zookeeper]
           relabel_configs:
-            - source_labels: [__meta_ec2_tag_HostName]
-              target_label: hostname
+            - source_labels: [__meta_ec2_private_ip]
+              target_label: private_ip
