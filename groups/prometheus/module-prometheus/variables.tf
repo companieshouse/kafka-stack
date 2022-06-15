@@ -67,6 +67,11 @@ variable "prometheus_access" {
   })
 }
 
+variable "prometheus_kafka_metrics_port" {
+  description = "The metrics port to be used for Prometheus Kafka Exporter"
+  type = string
+}
+
 variable "prometheus_metrics_port" {
   description = "The metrics port to be used"
   type = string

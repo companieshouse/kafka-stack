@@ -20,7 +20,7 @@ write_files:
           scheme: http
           ec2_sd_configs:
             - region: ${region}
-              port: 9308
+              port: ${prometheus_kafka_metrics_port}
               filters:
                 - name: tag:Environment
                   values: [${environment}]

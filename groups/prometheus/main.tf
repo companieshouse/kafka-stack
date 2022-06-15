@@ -27,6 +27,7 @@ module "prometheus" {
   prometheus_service_group      = var.prometheus_service_group
   prometheus_service_user       = var.prometheus_service_user
   lvm_block_devices             = var.prometheus_lvm_block_devices
+  prometheus_kafka_metrics_port = var.prometheus_kafka_metrics_port
   prometheus_metrics_port       = var.prometheus_metrics_port
   region                        = var.region
   root_volume_size              = var.prometheus_root_volume_size
