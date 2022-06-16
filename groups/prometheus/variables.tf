@@ -47,6 +47,12 @@ variable "prometheus_lvm_block_devices" {
   }))
 }
 
+variable "prometheus_kafka_metrics_port" {
+  default = "9308"
+  description = "The metrics port to be used"
+  type = string
+}
+
 variable "prometheus_metrics_port" {
   default = "9100"
   description = "The metrics port to be used"
