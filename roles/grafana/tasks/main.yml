@@ -51,7 +51,7 @@
     ("slack_notification" not in alert_list)
   no_log: True
 
-- name: Create logging nodes dashboard
+- name: Create kafka3 monitoring dashboards
   uri:
     url: "{{ grafana_url }}/api/dashboards/db"
     method: POST
