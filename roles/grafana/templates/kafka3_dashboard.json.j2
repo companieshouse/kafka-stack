@@ -1210,7 +1210,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": "kafka3-{{ item.environment }}",
-        "description": "Kafka3 {{ item.environment }} broker network traffic",
+        "description": "Kafka3 {{ item.environment }} broker network traffic received",
         "fieldConfig": {
           "defaults": {
             "custom": {}
@@ -1278,7 +1278,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Broker Network Traffic",
+        "title": "Broker Network Traffic (Rx)",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -1321,7 +1321,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": "kafka3-{{ item.environment }}",
-        "description": "Kafka3 {{ item.environment }} zookeeper network traffic",
+        "description": "Kafka3 {{ item.environment }} zookeeper network traffic received",
         "fieldConfig": {
           "defaults": {
             "custom": {}
@@ -1337,7 +1337,7 @@
           "y": 24
         },
         "hiddenSeries": false,
-        "id": 26,
+        "id": 38,
         "legend": {
           "avg": false,
           "current": false,
@@ -1389,7 +1389,229 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Zookeeper Network Traffic",
+        "title": "Zookeeper Network Traffic (Rx)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "KBs",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "kafka3-{{ item.environment }}",
+        "description": "Kafka3 {{ item.environment }} broker network traffic transmitted",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 0,
+          "y": 30
+        },
+        "hiddenSeries": false,
+        "id": 37,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.2.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "alias": "/.*/",
+            "color": "#E0B400"
+          },
+          {
+            "alias": "average",
+            "color": "#FFF899"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "irate(node_network_transmit_bytes_total{job=\"broker-node-metrics\",device=\"eth0\"}[5m])",
+            "interval": "",
+            "legendFormat": "{% raw %}{{device}} transmit ({{private_ip}}){% endraw %}",
+            "refId": "A"
+          },
+          {
+            "expr": "avg(irate(node_network_transmit_bytes_total{job=\"broker-node-metrics\",device=\"eth0\"}[5m]))",
+            "interval": "",
+            "legendFormat": "average",
+            "refId": "B"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Broker Network Traffic (Tx)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "KBs",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "kafka3-{{ item.environment }}",
+        "description": "Kafka3 {{ item.environment }} zookeeper network traffic transmitted",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 8,
+          "y": 30
+        },
+        "hiddenSeries": false,
+        "id": 26,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": false,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.2.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+          {
+            "alias": "/.*/",
+            "color": "#1F60C4"
+          },
+          {
+            "alias": "average",
+            "color": "#C0D8FF"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "irate(node_network_transmit_bytes_total{job=\"zookeeper-node-metrics\",device=\"eth0\"}[5m])",
+            "interval": "",
+            "legendFormat": "{% raw %}{{device}} transmit ({{private_ip}}){% endraw %}",
+            "refId": "A"
+          },
+          {
+            "expr": "avg(irate(node_network_transmit_bytes_total{job=\"zookeeper-node-metrics\",device=\"eth0\"}[5m]))",
+            "interval": "",
+            "legendFormat": "average",
+            "refId": "B"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Zookeeper Network Traffic (Tx)",
         "tooltip": {
           "shared": true,
           "sort": 0,
