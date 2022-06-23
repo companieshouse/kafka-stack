@@ -119,9 +119,9 @@
         "steppedLine": false,
         "targets": [
           {
-            "expr": "100 - (avg by (private_ip) (rate(node_cpu_seconds_total{job=\"broker-node-metrics\",mode=\"idle\"}[5m])) * 100)",
+            "expr": "100 - (avg by (name, private_ip) (rate(node_cpu_seconds_total{job=\"broker-node-metrics\",mode=\"idle\"}[5m])) * 100)",
             "interval": "",
-            "legendFormat": "{% raw %}{{private_ip}}{% endraw %}",
+            "legendFormat": "{% raw %}{{name}} [{{private_ip}}]{% endraw %}",
             "refId": "A"
           },
           {
@@ -279,9 +279,9 @@
         "steppedLine": false,
         "targets": [
           {
-            "expr": "100 - (avg by (private_ip) (rate(node_cpu_seconds_total{job=\"zookeeper-node-metrics\",mode=\"idle\"}[5m])) * 100)",
+            "expr": "100 - (avg by (name, private_ip) (rate(node_cpu_seconds_total{job=\"zookeeper-node-metrics\",mode=\"idle\"}[5m])) * 100)",
             "interval": "",
-            "legendFormat": "{% raw %}{{private_ip}}{% endraw %}",
+            "legendFormat": "{% raw %}{{name}} [{{private_ip}}]{% endraw %}",
             "refId": "A"
           },
           {
@@ -400,7 +400,7 @@
           {
             "expr": "node_memory_MemFree_bytes{job=\"broker-node-metrics\"}/1073741824",
             "interval": "",
-            "legendFormat": "{% raw %}{{private_ip}}{% endraw %}",
+            "legendFormat": "{% raw %}{{name}} [{{private_ip}}]{% endraw %}",
             "refId": "A"
           },
           {
@@ -512,7 +512,7 @@
           {
             "expr": "node_memory_MemFree_bytes{job=\"zookeeper-node-metrics\"}/1073741824",
             "interval": "",
-            "legendFormat": "{% raw %}{{private_ip}}{% endraw %}",
+            "legendFormat": "{% raw %}{{name}} [{{private_ip}}]{% endraw %}",
             "refId": "A"
           },
           {
@@ -664,7 +664,7 @@
           {
             "expr": "node_filesystem_avail_bytes{job=\"broker-node-metrics\", device=\"/dev/nvme0n1p1\"}/1073741824",
             "interval": "",
-            "legendFormat": "{% raw %}{{private_ip}}{% endraw %}",
+            "legendFormat": "{% raw %}{{name}} [{{private_ip}}]{% endraw %}",
             "refId": "A"
           },
           {
@@ -824,7 +824,7 @@
           {
             "expr": "node_filesystem_avail_bytes{job=\"zookeeper-node-metrics\", device=\"/dev/nvme0n1p1\"}/1073741824",
             "interval": "",
-            "legendFormat": "{% raw %}{{private_ip}}{% endraw %}",
+            "legendFormat": "{% raw %}{{name}} [{{private_ip}}]{% endraw %}",
             "refId": "A"
           },
           {
@@ -984,7 +984,7 @@
           {
             "expr": "node_filesystem_avail_bytes{job=\"broker-node-metrics\", mountpoint=\"/data/kafka\"}/1073741824",
             "interval": "",
-            "legendFormat": "{% raw %}{{private_ip}}{% endraw %}",
+            "legendFormat": "{% raw %}{{name}} [{{private_ip}}]{% endraw %}",
             "refId": "A"
           },
           {
@@ -1144,7 +1144,7 @@
           {
             "expr": "node_filesystem_avail_bytes{job=\"zookeeper-node-metrics\", mountpoint=\"/data/zookeeper\"}/1073741824",
             "interval": "",
-            "legendFormat": "{% raw %}{{private_ip}}{% endraw %}",
+            "legendFormat": "{% raw %}{{name}} [{{private_ip}}]{% endraw %}",
             "refId": "A"
           },
           {
@@ -1264,7 +1264,7 @@
           {
             "expr": "irate(node_network_receive_bytes_total{job=\"broker-node-metrics\",device=\"eth0\"}[5m])",
             "interval": "",
-            "legendFormat": "{% raw %}{{device}} receive ({{private_ip}}){% endraw %}",
+            "legendFormat": "{% raw %}{{device}} receive ({{name}} [{{private_ip}}]){% endraw %}",
             "refId": "A"
           },
           {
@@ -1375,7 +1375,7 @@
           {
             "expr": "irate(node_network_receive_bytes_total{job=\"zookeeper-node-metrics\",device=\"eth0\"}[5m])",
             "interval": "",
-            "legendFormat": "{% raw %}{{device}} receive ({{private_ip}}){% endraw %}",
+            "legendFormat": "{% raw %}{{device}} receive ({{name}} [{{private_ip}}]){% endraw %}",
             "refId": "A"
           },
           {
@@ -1486,7 +1486,7 @@
           {
             "expr": "irate(node_network_transmit_bytes_total{job=\"broker-node-metrics\",device=\"eth0\"}[5m])",
             "interval": "",
-            "legendFormat": "{% raw %}{{device}} transmit ({{private_ip}}){% endraw %}",
+            "legendFormat": "{% raw %}{{device}} transmit ({{name}} [{{private_ip}}]){% endraw %}",
             "refId": "A"
           },
           {
@@ -1597,7 +1597,7 @@
           {
             "expr": "irate(node_network_transmit_bytes_total{job=\"zookeeper-node-metrics\",device=\"eth0\"}[5m])",
             "interval": "",
-            "legendFormat": "{% raw %}{{device}} transmit ({{private_ip}}){% endraw %}",
+            "legendFormat": "{% raw %}{{device}} transmit ({{name}} [{{private_ip}}]){% endraw %}",
             "refId": "A"
           },
           {
