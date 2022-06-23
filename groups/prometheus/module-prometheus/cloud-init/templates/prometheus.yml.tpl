@@ -33,6 +33,8 @@ write_files:
               target_label: hostname
             - source_labels: [__meta_ec2_tag_Name]
               target_label: name
+            - source_labels: [__meta_ec2_private_ip]
+              target_label: private_ip
 
         - job_name: broker-node-metrics
           scrape_interval: 60s
@@ -50,6 +52,10 @@ write_files:
                 - name: tag:ServiceSubType
                   values: [kafka]
           relabel_configs:
+            - source_labels: [__meta_ec2_tag_HostName]
+              target_label: hostname
+            - source_labels: [__meta_ec2_tag_Name]
+              target_label: name
             - source_labels: [__meta_ec2_private_ip]
               target_label: private_ip
 
@@ -69,5 +75,9 @@ write_files:
                 - name: tag:ServiceSubType
                   values: [zookeeper]
           relabel_configs:
+            - source_labels: [__meta_ec2_tag_HostName]
+              target_label: hostname
+            - source_labels: [__meta_ec2_tag_Name]
+              target_label: name
             - source_labels: [__meta_ec2_private_ip]
               target_label: private_ip
