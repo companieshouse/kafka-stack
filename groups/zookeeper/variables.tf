@@ -3,6 +3,18 @@ variable "account_name" {
   type        = string
 }
 
+variable "allow_client_administration_access" {
+  default     = false
+  description = "A flag indicating whether to allow administration access for zookeeper clients"
+  type        = bool
+}
+
+variable "allow_prometheus_administration_access" {
+  default     = false
+  description = "A flag indicating whether to allow administration access to prometheus"
+  type        = bool
+}
+
 variable "cmak_basic_authentication" {
   default     = null
   description = "An object containing basic authentication credentials"
