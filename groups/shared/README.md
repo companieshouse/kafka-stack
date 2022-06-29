@@ -1,4 +1,4 @@
-# kafka
+# shared
 
 Provisions resources shared across the stack
 
