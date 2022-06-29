@@ -71,19 +71,21 @@ locals {
   kafka_broker_access = {
     cidr_blocks: concat(
       local.applications_subnet_cidrs,
-      local.automation_subnet_cidrs,
+      var.allow_broker_automation_access ? local.automation_subnet_cidrs : [],
       local.placement_subnet_cidrs
     )
-    list_ids: [
+    list_ids: var.allow_broker_administration_access ? [
       data.aws_ec2_managed_prefix_list.administration.id
-    ]
+    ] : []
   }
 
   prometheus_access = {
     cidr_blocks: concat(
       local.placement_subnet_cidrs
     )
-    list_ids: []
+    list_ids: var.allow_prometheus_administration_access ? [
+      data.aws_ec2_managed_prefix_list.administration.id
+    ] : []
   }
 
 }

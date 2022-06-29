@@ -3,6 +3,24 @@ variable "account_name" {
   type        = string
 }
 
+variable "allow_broker_administration_access" {
+  default     = false
+  description = "A flag indicating whether to allow administration access to the brokers"
+  type        = bool
+}
+
+variable "allow_broker_automation_access" {
+  default     = false
+  description = "A flag indicating whether to allow automation access to the brokers"
+  type        = bool
+}
+
+variable "allow_prometheus_administration_access" {
+  default     = false
+  description = "A flag indicating whether to allow administration access to prometheus"
+  type        = bool
+}
+
 variable "debug" {
   default     = false
   description = "A flag indicating whether to output additional debug level information"

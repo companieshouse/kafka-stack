@@ -51,16 +51,16 @@ locals {
     cidr_blocks: concat(
       local.placement_subnet_cidrs
     )
-    list_ids: [
+    list_ids: var.allow_prometheus_administration_access ? [
       data.aws_ec2_managed_prefix_list.administration.id
-    ]
+    ] : []
   }
 
   zookeeper_client_access = {
     cidr_blocks: local.placement_subnet_cidrs,
-    list_ids: [
+    list_ids: var.allow_client_administration_access ? [
       data.aws_ec2_managed_prefix_list.administration.id
-    ]
+    ] : []
   }
 
   zookeeper_peer_access = {
