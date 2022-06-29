@@ -12,6 +12,12 @@ View usage instructions for the terraform-runner [here](https://companieshouse.a
 
 This repository comprises the following groups
 
-| Name                                        | Description                |
-| ------------------------------------------- | -------------------------- |
-| [kafka-stack](groups/kafka-stack/README.md) | Provisions a Kafka cluster |
+| Name                                      | Description                                          | Dependencies          |
+| ----------------------------------------- | ---------------------------------------------------- | --------------------- |
+| [grafana](groups/grafana/README.md)       | Provisions Grafana                                   | `shared`              |
+| [kafka](groups/kafka/README.md)           | Provisions a Kafka cluster                           | `shared`, `zookeeper` |
+| [prometheus](groups/prometheus/README.md) | Provisions Prometheus                                | `shared`              |
+| [shared](groups/shared/README.md)         | Provisions infrastructure shared by the other groups | -                     |
+| [zookeeper](groups/zookeeper/README.md)   | Provisions a Zookeeper cluster                       | `shared`              |
+
+**Note:** In the table above `Dependencies` indicates that the group will fail to provision if the required group hasn’t been provisioned in advance. It should be noted that while the grafana group makes use of infrastructure provisioned in the prometheus group, it does not need it to be provisioned successfully
