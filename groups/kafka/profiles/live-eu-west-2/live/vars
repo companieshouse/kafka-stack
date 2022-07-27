@@ -1,7 +1,7 @@
-account_name = "development"
-allow_broker_administration_access = true
-allow_broker_automation_access = true
-environment = "devops2"
+account_name = "live"
+allow_broker_automation_access = false
+default_instance_type = "m5.large"
+environment = "live"
 
 instance_specifications = {
   "eu-west-2a" = {
@@ -17,11 +17,12 @@ instance_specifications = {
 
 lvm_block_definitions = [
   {
-    aws_volume_size_gb: "100",
+    aws_volume_size_gb: "1000",
     filesystem_resize_tool: "xfs_growfs",
     lvm_logical_volume_device_node: "/dev/kafka/data",
     lvm_physical_volume_device_node: "/dev/xvdb"
   }
 ]
 
-route53_available = true
+root_volume_size_gib = 100
+route53_available = false
