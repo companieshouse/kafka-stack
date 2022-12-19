@@ -8,6 +8,12 @@ write_files:
         scrape_interval:     30s
         evaluation_interval: 30s
 
+      alerting:
+        alertmanagers:
+        - static_configs:
+          - targets:
+            - 'localhost:9093'
+
       scrape_configs:
         - job_name: 'prometheus'
           static_configs:

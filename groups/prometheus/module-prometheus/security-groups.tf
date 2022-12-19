@@ -23,6 +23,16 @@ resource "aws_security_group" "prometheus" {
     ]
   }
 
+  ingress {
+    description = "alertmanager"
+    from_port   = 9093
+    to_port     = 9093
+    protocol    = "tcp"
+    security_groups = [
+      aws_security_group.prometheus_load_balancer.id
+    ]
+  }
+
   egress {
     description = "Allow outbound traffic"
     from_port   = 0
