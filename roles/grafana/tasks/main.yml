@@ -1,5 +1,23 @@
 ---
 
+- name: Get list of datasources
+  uri:
+    url: "{{ grafana_url }}/api/datasources"
+    method: GET
+    url_username: "{{ item.grafana_admin_user }}"
+    url_password: "{{ item.grafana_admin_password }}"
+    status_code: 200
+    force_basic_auth: yes
+    headers:
+      Content-Type: application/json
+  with_items:
+    "{{ kafka3_variables }}"
+  register: list_response
+  no_log: True
+
+- set_fact:
+    kafka3_datasources: "{{ list_response | json_query('results[*].json[].name') | list }}"
+
 - name: Create kafka3 Prometheus datasource
   uri:
     url: "{{ grafana_url }}/api/datasources"
@@ -14,6 +32,8 @@
       Content-Type: application/json
   with_items:
     "{{ kafka3_variables }}"
+  when:
+    ("kafka3-" + item.environment not in kafka3_datasources)
   no_log: True
 
 - name: Get slack notification channel list
