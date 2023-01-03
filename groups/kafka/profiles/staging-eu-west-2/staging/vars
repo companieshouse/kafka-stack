@@ -1,5 +1,6 @@
 account_name = "staging"
-allow_broker_automation_access = false
+allow_broker_administration_access = true
+allow_broker_automation_access = true
 default_instance_type = "m5.large"
 environment = "staging"
 
