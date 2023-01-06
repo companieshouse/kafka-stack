@@ -1,7 +1,0 @@
----
-
-- hosts: ansible_runner_boxes
-  connection: local
-  gather_facts: no
-  roles:
-    - grafana

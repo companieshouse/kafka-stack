@@ -1,106 +1,17 @@
 ---
 
-- name: Get list of datasources
-  uri:
-    url: "{{ grafana_url }}/api/datasources"
-    method: GET
-    url_username: "{{ item.grafana_admin_user }}"
-    url_password: "{{ item.grafana_admin_password }}"
-    status_code: 200
-    force_basic_auth: yes
-    headers:
-      Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  register: list_response
-  no_log: True
+- import_tasks: configure-kafka3-datasource.yml
+  tags:
+    - configure-kafka3-datasource
 
-- set_fact:
-    kafka3_datasources: "{{ list_response | json_query('results[*].json[].name') | list }}"
+- import_tasks: configure-slack.yml
+  tags:
+    - configure-slack
 
-- name: Create kafka3 Prometheus datasource
-  uri:
-    url: "{{ grafana_url }}/api/datasources"
-    method: POST
-    url_username: "{{ item.grafana_admin_user }}"
-    url_password: "{{ item.grafana_admin_password }}"
-    body: "{{ lookup('template', 'roles/grafana/templates/kafka3_prometheus_datasource.json.j2') }}"
-    status_code: 200
-    body_format: json
-    force_basic_auth: yes
-    headers:
-      Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  when:
-    ("kafka3-" + item.environment not in kafka3_datasources)
-  no_log: True
+- import_tasks: provision-monitoring-dashboard.yml
+  tags:
+    - provision-monitoring-dashboard
 
-- name: Get slack notification channel list
-  uri:
-    url: "{{ grafana_url }}/api/alert-notifications/lookup"
-    method: GET
-    url_username: "{{ item.grafana_admin_user }}"
-    url_password: "{{ item.grafana_admin_password }}"
-    status_code: 200
-    force_basic_auth: yes
-    headers:
-      Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  register: alert_response
-
-- set_fact:
-    alert_list: "{{ alert_response | json_query('results[*].json[].name') | list }}"
-
-- name: Create slack notification channel
-  uri:
-    url: "{{ grafana_url }}/api/alert-notifications"
-    method: POST
-    url_username: "{{ item.grafana_admin_user }}"
-    url_password: "{{ item.grafana_admin_password }}"
-    body: "{{ lookup('template', 'roles/grafana/templates/slack_notification.json.j2') }}"
-    status_code: 200
-    body_format: json
-    force_basic_auth: yes
-    headers:
-      Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  when:
-    ("slack_notification" not in alert_list)
-  no_log: True
-
-- name: Create kafka3 monitoring dashboards
-  uri:
-    url: "{{ grafana_url }}/api/dashboards/db"
-    method: POST
-    url_username: "{{ item.grafana_admin_user }}"
-    url_password: "{{ item.grafana_admin_password }}"
-    body: "{{ lookup('template', 'roles/grafana/templates/kafka3_dashboard.json.j2') }}"
-    status_code: 200
-    body_format: json
-    validate_certs: no
-    force_basic_auth: yes
-    headers:
-      Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  no_log: True
-
-- name: Create kafka3 topic overview dashboards
-  uri:
-    url: "{{ grafana_url }}/api/dashboards/db"
-    method: POST
-    url_username: "{{ item.grafana_admin_user }}"
-    url_password: "{{ item.grafana_admin_password }}"
-    body: "{{ lookup('template', 'roles/grafana/templates/kafka3_topic_overview.json.j2') }}"
-    status_code: 200
-    body_format: json
-    validate_certs: no
-    force_basic_auth: yes
-    headers:
-      Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  no_log: True
+- import_tasks: provision-topic-overview-dashboard.yml
+  tags:
+    - provision-topic-overview-dashboard
