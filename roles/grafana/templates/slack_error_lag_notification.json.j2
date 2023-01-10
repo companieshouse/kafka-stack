@@ -1,8 +1,9 @@
+
 {
     "disableResolveMessage": false,
     "frequency": "6h",
     "isDefault": false,
-    "name": "slack_notification",
+    "name": "slack_error_notification",
     "secureFields": {
        "url": true
     },
@@ -14,7 +15,7 @@
        "iconUrl": "",
        "mentionGroups": "",
        "mentionUsers": "",
-       "recipient": "{{ item.grafana_slack_recipient }}",
+       "recipient": "{{ item.grafana_slack_error_lag_recipient }}",
        "severity": "critical",
        "token": "",
        "uploadImage": false,
@@ -22,5 +23,5 @@
        "username": "Kafka3 {{ item.environment }}"
     },
     "type": "slack",
-    "uid": "slack_notification"
+    "uid": "slack_error_notification"
 }

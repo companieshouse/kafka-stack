@@ -17,13 +17,13 @@
 - set_fact:
     alert_list: "{{ alert_response | json_query('results[*].json[].name') | list }}"
 
-- name: Create slack notification channel
+- name: Create slack infrastructure notification channel
   uri:
     url: "{{ grafana_url }}/api/alert-notifications"
     method: POST
     url_username: "{{ item.grafana_admin_user }}"
     url_password: "{{ item.grafana_admin_password }}"
-    body: "{{ lookup('template', 'roles/grafana/templates/slack_notification.json.j2') }}"
+    body: "{{ lookup('template', 'roles/grafana/templates/slack_infrastructure_notification.json.j2') }}"
     status_code: 200
     body_format: json
     force_basic_auth: yes
@@ -32,5 +32,41 @@
   with_items:
     "{{ kafka3_variables }}"
   when:
-    ("slack_notification" not in alert_list)
+    ("slack_infrastructure_notification" not in alert_list)
+  no_log: True
+
+- name: Create slack error lag notification channel
+  uri:
+    url: "{{ grafana_url }}/api/alert-notifications"
+    method: POST
+    url_username: "{{ item.grafana_admin_user }}"
+    url_password: "{{ item.grafana_admin_password }}"
+    body: "{{ lookup('template', 'roles/grafana/templates/slack_error_lag_notification.json.j2') }}"
+    status_code: 200
+    body_format: json
+    force_basic_auth: yes
+    headers:
+      Content-Type: application/json
+  with_items:
+    "{{ kafka3_variables }}"
+  when:
+    ("slack_error_notification" not in alert_list)
+  no_log: True
+
+- name: Create slack lag notification channel
+  uri:
+    url: "{{ grafana_url }}/api/alert-notifications"
+    method: POST
+    url_username: "{{ item.grafana_admin_user }}"
+    url_password: "{{ item.grafana_admin_password }}"
+    body: "{{ lookup('template', 'roles/grafana/templates/slack_lag_notification.json.j2') }}"
+    status_code: 200
+    body_format: json
+    force_basic_auth: yes
+    headers:
+      Content-Type: application/json
+  with_items:
+    "{{ kafka3_variables }}"
+  when:
+    ("slack_lag_notification" not in alert_list)
   no_log: True
