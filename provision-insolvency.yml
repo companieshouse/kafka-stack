@@ -1,0 +1,11 @@
+---
+
+- hosts: ansible_runner_boxes
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Configure Grafana
+      import_role:
+        name: grafana
+      tags:
+        - provision-insolvency-dashboard
