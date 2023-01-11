@@ -5,7 +5,7 @@
   gather_facts: no
   tasks:
     - name: Configure Grafana
-      import_role:
+      include_role:
         name: grafana
       tags:
         - configure-kafka3-datasource

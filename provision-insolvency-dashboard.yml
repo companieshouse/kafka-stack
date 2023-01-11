@@ -4,8 +4,8 @@
   connection: local
   gather_facts: no
   tasks:
-    - name: Configure Grafana
-      import_role:
+    - name: Provision insolvency dashboards
+      include_role:
         name: grafana
       tags:
         - provision-insolvency-dashboard
