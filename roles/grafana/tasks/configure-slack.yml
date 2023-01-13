@@ -10,8 +10,7 @@
     force_basic_auth: yes
     headers:
       Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
+  with_items: "{{ kafka3_variables }}"
   register: alert_response
 
 - set_fact:
@@ -29,10 +28,8 @@
     force_basic_auth: yes
     headers:
       Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  when:
-    ("slack_infrastructure_notification" not in alert_list)
+  with_items: "{{ kafka3_variables }}"
+  when: "'slack_infrastructure_notification' not in alert_list"
   no_log: True
 
 - name: Create slack error lag notification channel
@@ -47,10 +44,8 @@
     force_basic_auth: yes
     headers:
       Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  when:
-    ("slack_error_notification" not in alert_list)
+  with_items: "{{ kafka3_variables }}"
+  when: "'slack_error_notification' not in alert_list"
   no_log: True
 
 - name: Create slack lag notification channel
@@ -65,8 +60,6 @@
     force_basic_auth: yes
     headers:
       Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  when:
-    ("slack_lag_notification" not in alert_list)
+  with_items: "{{ kafka3_variables }}"
+  when: "'slack_lag_notification' not in alert_list"
   no_log: True

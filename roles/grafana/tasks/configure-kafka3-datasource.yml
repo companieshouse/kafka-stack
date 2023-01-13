@@ -10,8 +10,7 @@
     force_basic_auth: yes
     headers:
       Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
+  with_items: "{{ kafka3_variables }}"
   register: list_response
   no_log: True
 
@@ -30,8 +29,6 @@
     force_basic_auth: yes
     headers:
       Content-Type: application/json
-  with_items:
-    "{{ kafka3_variables }}"
-  when:
-    ("kafka3-" + item.environment not in kafka3_datasources)
+  with_items: "{{ kafka3_variables }}"
+  when: "'kafka3-' + item.environment not in kafka3_datasources"
   no_log: True
