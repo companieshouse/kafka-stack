@@ -15,7 +15,3 @@
 - import_tasks: provision-topic-overview-dashboard.yml
   tags:
     - provision-topic-overview-dashboard
-
-- import_tasks: provision-insolvency-dashboard.yml
-  tags:
-    - provision-insolvency-dashboard
