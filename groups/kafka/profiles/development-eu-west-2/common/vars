@@ -1,4 +1,5 @@
 account_name = "development"
+allow_broker_administration_access = true
 allow_broker_automation_access = true
 environment = "common"
 
