@@ -53,7 +53,7 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Above threshold: {{ item.topic_insolvency_delta }} lag",
+          "message": "Topic: {{ item.topic_insolvency_delta }} lag above threshold or there is no data",
           "name": "{{ item.topic_insolvency_delta }} lag alert",
           "noDataState": "alerting",
           "notifications": [
@@ -196,7 +196,7 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Topic: {{ item.topic_insolvency_error_delta }} lag above thereshold",
+          "message": "Topic: {{ item.topic_insolvency_error_delta }} lag above threshold or there is no data",
           "name": "{{ item.topic_insolvency_error_delta }} lag alert",
           "noDataState": "alerting",
           "notifications": [
