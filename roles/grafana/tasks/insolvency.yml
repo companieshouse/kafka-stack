@@ -13,5 +13,5 @@
     force_basic_auth: yes
     headers:
       Content-Type: application/json
-  with_items: "{{ kafka3_variables }}"
+  with_items: "{{ dashboard_variables }}"
   no_log: True
