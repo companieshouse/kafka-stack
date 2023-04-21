@@ -19,6 +19,8 @@ module "prometheus" {
   certificate_arn               = local.certificate_arn
   debug                         = var.debug
   dns_zone_name                 = local.dns_zone_name
+  email_from                    = local.email_from
+  email_to                      = local.email_to
   environment                   = var.environment
   instance_count                = var.prometheus_instance_count
   instance_type                 = var.prometheus_instance_type
@@ -33,6 +35,8 @@ module "prometheus" {
   root_volume_size              = var.prometheus_root_volume_size
   route53_available             = local.route53_available
   service                       = var.service
+  smarthost                     = local.smarthost
+  smarthost_port                = local.smarthost_port
   ssh_access                    = local.ssh_access
   ssh_keyname                   = local.ssh_keyname
   subnet_ids                    = local.placement_subnet_ids

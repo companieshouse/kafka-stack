@@ -14,6 +14,25 @@ data "template_cloudinit_config" "prometheus" {
 
   part {
     content_type                    = "text/cloud-config"
+    content                         = templatefile("${path.module}/cloud-init/templates/alertmanager.yml.tpl", {
+      email_from      = var.email_from
+      email_to        = var.email_to
+      smarthost       = var.smarthost
+      smarthost_port  = var.smarthost_port
+    })
+    merge_type = var.user_data_merge_strategy
+  }
+
+  part {
+    content_type                    = "text/cloud-config"
+    content                         = templatefile("${path.module}/cloud-init/templates/alertmanager.service.tpl", {
+      instance_fqdn = "${var.service}-${var.environment}-prometheus-${count.index + 1}.${var.dns_zone_name}"
+    })
+    merge_type = var.user_data_merge_strategy
+  }
+
+  part {
+    content_type                    = "text/cloud-config"
     content                         = templatefile("${path.module}/cloud-init/templates/prometheus.yml.tpl", {
       environment                   = var.environment
       prometheus_kafka_metrics_port = var.prometheus_kafka_metrics_port

@@ -10,9 +10,13 @@ write_files:
 
       alerting:
         alertmanagers:
-        - static_configs:
+        - path_prefix: "/alertmanager/"
+          static_configs:
           - targets:
             - 'localhost:9093'
+
+      rule_files:
+        - "/etc/prometheus/prometheus_rules.yml"
 
       scrape_configs:
         - job_name: 'prometheus'
