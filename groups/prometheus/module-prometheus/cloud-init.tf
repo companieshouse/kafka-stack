@@ -26,7 +26,10 @@ data "template_cloudinit_config" "prometheus" {
   part {
     content_type                    = "text/cloud-config"
     content                         = templatefile("${path.module}/cloud-init/templates/alertmanager.service.tpl", {
-      instance_fqdn = "${var.service}-${var.environment}-prometheus-${count.index + 1}.${var.dns_zone_name}"
+      environment                 = var.environment
+      load_balancer_dns_zone_name = var.load_balancer_dns_zone_name
+      service                     = var.service
+
     })
     merge_type = var.user_data_merge_strategy
   }

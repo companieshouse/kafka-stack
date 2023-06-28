@@ -15,7 +15,7 @@ write_files:
       ExecStart=/opt/prometheus/alertmanager/alertmanager \
         --config.file=/etc/alertmanager/alertmanager.yml \
         --storage.path=/var/opt/alertmanager/data \
-        --web.external-url=https://${instance_fqdn}/alertmanager \
+        --web.external-url=https://${service}-${environment}-prometheus.${load_balancer_dns_zone_name}/alertmanager \
         --web.route-prefix=/alertmanager
 
       Restart=always
