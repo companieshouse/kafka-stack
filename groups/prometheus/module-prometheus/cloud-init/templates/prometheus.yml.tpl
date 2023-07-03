@@ -8,6 +8,16 @@ write_files:
         scrape_interval:     30s
         evaluation_interval: 30s
 
+      alerting:
+        alertmanagers:
+        - path_prefix: "/alertmanager/"
+          static_configs:
+          - targets:
+            - 'localhost:9093'
+
+      rule_files:
+        - "/etc/prometheus/prometheus_rules.yml"
+
       scrape_configs:
         - job_name: 'prometheus'
           static_configs:

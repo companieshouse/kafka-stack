@@ -23,6 +23,16 @@ variable "dns_zone_name" {
   type        = string
 }
 
+variable "email_from" {
+  description = "The sender's email address used bt alertmanager"
+  type        = string
+}
+
+variable "email_to" {
+  description = "The email address alertmanager uses to send notifications to"
+  type        = string
+}
+
 variable "environment" {
   description = "The environment name to be used when creating AWS resources"
   type        = string
@@ -104,6 +114,16 @@ variable "route53_available" {
 
 variable "service" {
   description = "The service name to be used when creating AWS resources"
+  type        = string
+}
+
+variable "smarthost" {
+  description = "The SMTP host through which emails are sent"
+  type        = string
+}
+
+variable "smarthost_port" {
+  description = "The SMTP hosts port number through which emails are sent"
   type        = string
 }
 

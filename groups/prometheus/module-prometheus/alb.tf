@@ -45,12 +45,36 @@ resource "aws_lb_target_group" "prometheus" {
   }
 }
 
+resource "aws_lb_target_group" "alertmanager" {
+  name        = "${var.service}-${var.environment}-alertmanager"
+  port        = 9093
+  protocol    = "HTTP"
+  target_type = "ip"
+  vpc_id      = var.vpc_id
+
+  health_check {
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 3
+    path                = "/alertmanager/"
+    interval            = 60
+  }
+}
+
 resource "aws_lb_target_group_attachment" "prometheus" {
   count            = var.instance_count
 
   target_group_arn = aws_lb_target_group.prometheus.arn
   target_id        = element(aws_instance.prometheus.*.private_ip, count.index)
   port             = 9090
+}
+
+resource "aws_lb_target_group_attachment" "alertmanager" {
+  count            = var.instance_count
+
+  target_group_arn = aws_lb_target_group.alertmanager.arn
+  target_id        = element(aws_instance.prometheus.*.private_ip, count.index)
+  port             = 9093
 }
 
 resource "aws_lb_listener" "prometheus" {
@@ -67,4 +91,37 @@ resource "aws_lb_listener" "prometheus" {
   depends_on = [
     aws_acm_certificate_validation.certificate
   ]
+}
+
+resource "aws_lb_listener_rule" "alertmanager_rule1" {
+  listener_arn = aws_lb_listener.prometheus.arn
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.alertmanager.arn
+  }
+  condition {
+    path_pattern {
+      values = [
+        "*/alertmanager/*"
+      ]
+    }
+  }
+}
+
+resource "aws_lb_listener_rule" "alertmanager_rule2" {
+  listener_arn = aws_lb_listener.prometheus.arn
+  action {
+    type  = "redirect"
+    redirect {
+      path = "/alertmanager/"
+      status_code = "HTTP_301"
+    }
+  }
+  condition {
+    path_pattern {
+      values = [
+        "/alertmanager"
+      ]
+    }
+  }
 }

@@ -4,6 +4,12 @@ prometheus_lvm_block_devices = [
     filesystem_resize_tool: "xfs_growfs",
     lvm_logical_volume_device_node: "/dev/prometheus/data",
     lvm_physical_volume_device_node: "/dev/xvdb"
+  },
+  {
+    aws_volume_size_gb: "20",
+    filesystem_resize_tool: "xfs_growfs",
+    lvm_logical_volume_device_node: "/dev/alertmanager/data",
+    lvm_physical_volume_device_node: "/dev/xvdc"
   }
 ]
 

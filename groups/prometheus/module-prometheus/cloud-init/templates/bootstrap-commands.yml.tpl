@@ -10,3 +10,5 @@ runcmd:
   - xfs_growfs ${root_volume_device_node}
   - systemctl enable prometheus
   - systemctl start prometheus
+  - systemctl enable alertmanager
+  - systemctl start alertmanager
