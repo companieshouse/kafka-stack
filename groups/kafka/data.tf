@@ -2,6 +2,10 @@ data "aws_ec2_managed_prefix_list" "administration" {
   name = "administration-cidr-ranges"
 }
 
+data "aws_ec2_managed_prefix_list" "automation" {
+  name = "shared-services-management-cidrs"
+}
+
 data "aws_instance" "zookeepers" {
   for_each = toset(data.aws_instances.zookeepers.ids)
 

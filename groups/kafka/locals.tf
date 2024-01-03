@@ -64,6 +64,9 @@ locals {
     local.placement_subnets.*.cidr_block
   ))
 
+  broker_automation_access_list_ids = var.allow_broker_automation_access ? [data.aws_ec2_managed_prefix_list.automation.id] : []
+  broker_admin_access_list_ids = var.allow_broker_administration_access ? [data.aws_ec2_managed_prefix_list.administration.id] : []
+
   # ----------------------------------------------------------------------------
 
   debug = {}
@@ -74,9 +77,7 @@ locals {
       var.allow_broker_automation_access ? local.automation_subnet_cidrs : [],
       local.placement_subnet_cidrs
     )
-    list_ids: var.allow_broker_administration_access ? [
-      data.aws_ec2_managed_prefix_list.administration.id
-    ] : []
+    list_ids: concat(local.broker_automation_access_list_ids, local.broker_admin_access_list_ids)
   }
 
   prometheus_access = {
