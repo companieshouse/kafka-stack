@@ -1,0 +1,28 @@
+account_name = "live"
+allow_broker_automation_access = false
+default_instance_type = "t3.medium"
+environment = "livesbox"
+
+instance_specifications = {
+  "eu-west-2a" = {
+    "1" = {}
+  }
+  "eu-west-2b" = {
+    "2" = {}
+  }
+  "eu-west-2c" = {
+    "3" = {}
+  }
+}
+
+lvm_block_definitions = [
+  {
+    aws_volume_size_gb: "1000",
+    filesystem_resize_tool: "xfs_growfs",
+    lvm_logical_volume_device_node: "/dev/kafka/data",
+    lvm_physical_volume_device_node: "/dev/xvdb"
+  }
+]
+
+root_volume_size_gib = 100
+route53_available = false
