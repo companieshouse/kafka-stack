@@ -212,6 +212,12 @@ variable "subnets" {
   type = map
 }
 
+variable "stub_plan_mode" {
+  default     = false
+  description = "When true, skips AMI lookup and broker/resource creation for wiring-only plan validation"
+  type        = bool
+}
+
 variable "team" {
   description = "The team responsible for administering the instance"
   type        = string

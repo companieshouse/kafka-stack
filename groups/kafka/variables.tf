@@ -33,7 +33,7 @@ variable "environment" {
 }
 
 variable "default_ami_version_pattern" {
-  default = "ami-0a81eb7c577ead8c8" #"4.2.*" 
+  default = "4.2.*"
   description = "The default AMI version pattern to use when matching AMIs for instances"
   type        = string
 }
@@ -93,6 +93,12 @@ variable "service" {
   default     = "kafka3"
   description = "The service name to be used when creating AWS resources"
   type        = string
+}
+
+variable "stub_plan_mode" {
+  default     = false
+  description = "When true, runs a wiring-only plan and skips AMI-dependent broker provisioning"
+  type        = bool
 }
 
 variable "team" {

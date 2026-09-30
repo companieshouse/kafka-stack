@@ -1,5 +1,5 @@
 resource "aws_route53_record" "kafka" {
-  for_each = var.route53_available ? local.instance_definitions : {}
+  for_each = var.stub_plan_mode || !var.route53_available ? {} : local.instance_definitions
 
   zone_id = data.aws_route53_zone.zone[0].zone_id
   name    = each.value.hostname

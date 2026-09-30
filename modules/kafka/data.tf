@@ -1,14 +1,9 @@
 data "aws_ami" "kafkas" {
-  for_each = local.specification_ami_version_patterns
+  for_each = var.stub_plan_mode ? toset([]) : local.specification_ami_version_patterns
 
   owners      = [var.ami_owner_id]
   most_recent = true
   name_regex  = "^kafka-ami-${each.value}$"
-
-  filter {
-    name   = "name"
-    values = ["kafka-ami-4.2.*"]
-  }
 }
 
 data "aws_route53_zone" "zone" {
@@ -19,7 +14,7 @@ data "aws_route53_zone" "zone" {
 }
 
 data "cloudinit_config" "kafkas" {
-  for_each = local.instance_definitions
+  for_each = var.stub_plan_mode ? {} : local.instance_definitions
 
   gzip          = true
   base64_encode = true

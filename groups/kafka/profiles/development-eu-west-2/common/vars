@@ -25,3 +25,4 @@ lvm_block_definitions = [
 ]
 
 route53_available = true
+stub_plan_mode = true

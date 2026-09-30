@@ -2,14 +2,14 @@ locals {
 
   # ----------------------------------------------------------------------------
 
-  ami_lvm_block_devices = {
+  ami_lvm_block_devices = var.stub_plan_mode ? {} : {
     for pattern, ami in data.aws_ami.kafkas : pattern => [
       for block_device in ami.block_device_mappings : block_device
         if block_device.device_name != ami.root_device_name
     ]
   }
 
-  ami_root_block_devices = {
+  ami_root_block_devices = var.stub_plan_mode ? {} : {
     for pattern, ami in data.aws_ami.kafkas : pattern =>
       tolist(ami.block_device_mappings)[index(
         ami.block_device_mappings.*.device_name,
@@ -44,7 +44,7 @@ locals {
 
   update_nameserver = !var.route53_available
 
-  manual_dns_entries = var.route53_available ? [] : [
+  manual_dns_entries = var.stub_plan_mode || var.route53_available ? [] : [
     for id, definition in local.instance_definitions :
       "${definition.hostname} -> ${aws_instance.kafkas[id].private_ip}"
   ]

@@ -10,7 +10,7 @@ output "instance_ips" {
 
 output "instance_profile" {
   description = "The IAM instance profile used by Kafka brokers"
-  value       = module.instance_profile.aws_iam_instance_profile.name
+  value       = var.stub_plan_mode ? null : module.instance_profile[0].aws_iam_instance_profile.name
 }
 
 output "debug" {

@@ -1,14 +1,15 @@
 module "instance_profile" {
+  count  = var.stub_plan_mode ? 0 : 1
   source = "git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.162"
 
   name = "${var.service}-${var.environment}-kafka"
 }
 
 resource "aws_instance" "kafkas" {
-  for_each = local.instance_definitions
+  for_each = var.stub_plan_mode ? {} : local.instance_definitions
 
   ami                    = data.aws_ami.kafkas[each.value.ami_version_pattern].id
-  iam_instance_profile   = module.instance_profile.aws_iam_instance_profile.name
+  iam_instance_profile   = module.instance_profile[0].aws_iam_instance_profile.name
   instance_type          = each.value.instance_type
   subnet_id              = var.subnets[each.value.availability_zone].id
   user_data_base64       = data.cloudinit_config.kafkas[each.key].rendered

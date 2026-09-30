@@ -11,7 +11,7 @@ terraform {
 }
 
 module "kafka" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/kafka?ref=tags/1.0.162" # change this to the branch
+  source = "../../modules/kafka"
 
   ami_owner_id                    = local.ami_owner_id
   debug                           = var.debug
@@ -33,6 +33,7 @@ module "kafka" {
   service                         = var.service
   service_sub_type                = "kafka"
   ssm_kms_key                     = try(local.secrets.aws_ssm_kms_key_arn, null)
+  stub_plan_mode                  = var.stub_plan_mode
   subnets                         = local.placement_subnets_by_availability_zone
   team                            = var.team
   vpc_id                          = local.vpc_id
