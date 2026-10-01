@@ -8,3 +8,6 @@
 # Local Terraform workspace data
 terraform.tfstate.backup
 terraform.tfstate.d
+*.tfplan
+tfplan
+plan.json
