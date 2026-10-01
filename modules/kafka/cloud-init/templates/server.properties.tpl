@@ -1,4 +1,8 @@
 write_files:
+  - path: /etc/kafka-clusterid
+    owner: root:root
+    permissions: 0600
+    content: ${cluster_id}
   - path: ${kafka_home}/config/server.properties
     owner: ${kafka_service_user}:${kafka_service_group}
     permissions: 0644
@@ -9,7 +13,10 @@ write_files:
       controller.listener.names=CONTROLLER
       controller.quorum.voters=${controller_quorum_voters}
       delete.topic.enable=true
+      default.replication.factor=${default_replication_factor}
       group.initial.rebalance.delay.ms=0
+      inter.broker.listener.name=PLAINTEXT
+      listener.security.protocol.map=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
       listeners=PLAINTEXT://:9092,CONTROLLER://:${kafka_kraft_port}
       log.cleaner.enable=true
       log.dirs=${kafka_data_directory}

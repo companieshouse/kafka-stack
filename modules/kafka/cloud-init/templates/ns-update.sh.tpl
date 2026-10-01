@@ -7,7 +7,10 @@ write_files:
 
       set -e
 
-      ip_address=$(curl -f ${aws_instance_metadata_url}/latest/meta-data/local-ipv4)
+      token=$(curl -fsS -X PUT ${aws_instance_metadata_url}/latest/api/token \
+        -H "X-aws-ec2-metadata-token-ttl-seconds: 60")
+      ip_address=$(curl -fsS -H "X-aws-ec2-metadata-token: $${token}" \
+        ${aws_instance_metadata_url}/latest/meta-data/local-ipv4)
 
       cat<<EOF | /usr/bin/nsupdate -k ${key_path}/ns-update-key -v
       server ${dns_server_ip}

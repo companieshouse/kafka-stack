@@ -1,7 +1,7 @@
 resource "aws_security_group" "kafka" {
   description = "Restricts access for ${var.service}-${var.environment} kafka nodes"
-  name = "${var.service}-${var.environment}-kafka"
-  vpc_id = var.vpc_id
+  name        = "${var.service}-${var.environment}-kafka"
+  vpc_id      = var.vpc_id
 
   ingress {
     description     = "Kafka client traffic"
@@ -47,6 +47,14 @@ resource "aws_security_group" "kafka" {
     prefix_list_ids = var.prometheus_access.list_ids
   }
 
+  ingress {
+    description     = "Kafdrop UI from the load balancer"
+    from_port       = var.kafdrop_port
+    to_port         = var.kafdrop_port
+    protocol        = "tcp"
+    security_groups = [aws_security_group.kafdrop_load_balancer.id]
+  }
+
   egress {
     description = "Allow outbound traffic"
     from_port   = 0
@@ -56,11 +64,41 @@ resource "aws_security_group" "kafka" {
   }
 
   tags = {
-    Name        = "${var.service}-${var.environment}-kafka"
+    Name           = "${var.service}-${var.environment}-kafka"
+    Environment    = var.environment
+    Service        = var.service
+    ServiceSubType = var.service_sub_type
+    Team           = var.team
+    Type           = "SecurityGroup"
+  }
+}
+
+resource "aws_security_group" "kafdrop_load_balancer" {
+  description = "Restricts access to the ${var.service}-${var.environment} kafdrop load balancer"
+  name        = "${var.service}-${var.environment}-kafdrop-load-balancer"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description     = "Kafdrop UI"
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    cidr_blocks     = var.kafdrop_access.cidr_blocks
+    prefix_list_ids = var.kafdrop_access.list_ids
+  }
+
+  egress {
+    description = "Allow outbound traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name        = "${var.service}-${var.environment}-kafdrop"
     Environment = var.environment
     Service     = var.service
-    ServiceSubType = var.service_sub_type
-    Team        = var.team
     Type        = "SecurityGroup"
   }
 }

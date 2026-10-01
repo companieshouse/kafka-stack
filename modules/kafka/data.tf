@@ -1,20 +1,25 @@
 data "aws_ami" "kafkas" {
-  for_each = var.stub_plan_mode ? toset([]) : local.specification_ami_version_patterns
+  for_each = local.specification_ami_version_patterns
 
   owners      = [var.ami_owner_id]
   most_recent = true
   name_regex  = "^kafka-ami-${each.value}$"
+
+  filter {
+    name   = "name"
+    values = ["kafka-ami-4.2.*"]
+  }
 }
 
 data "aws_route53_zone" "zone" {
-  count        = var.route53_available ? 1 : 0
+  count = var.route53_available ? 1 : 0
 
   name         = var.dns_zone_name
   private_zone = false
 }
 
 data "cloudinit_config" "kafkas" {
-  for_each = var.stub_plan_mode ? {} : local.instance_definitions
+  for_each = local.instance_definitions
 
   gzip          = true
   base64_encode = true
@@ -63,17 +68,19 @@ data "cloudinit_config" "kafkas" {
   part {
     content_type = "text/cloud-config"
     content = templatefile(fileexists("${local.instance_template_path}/${each.key}/server.properties.tpl") ? "${local.instance_template_path}/${each.key}/server.properties.tpl" : "${local.template_path}/server.properties.tpl", {
-      controller_quorum_voters          = local.kafka_controller_quorum_voters
-      hostname                          = each.value.hostname
-      kafka_data_directory              = var.kafka_data_directory
-      kafka_home                        = var.kafka_home
-      kafka_kraft_port                  = var.kafka_kraft_port
-      kafka_service_group               = var.kafka_service_group
-      kafka_service_user                = var.kafka_service_user
-      min_insync_replicas               = var.kafka_min_insync_replicas
-      node_id                           = each.key
-      offsets_topic_replication_factor  = var.kafka_offsets_topic_replication_factor
-      rack_id                           = each.value.availability_zone
+      controller_quorum_voters         = local.kafka_controller_quorum_voters
+      hostname                         = each.value.hostname
+      kafka_data_directory             = var.kafka_data_directory
+      kafka_home                       = var.kafka_home
+      kafka_kraft_port                 = var.kafka_kraft_port
+      kafka_service_group              = var.kafka_service_group
+      kafka_service_user               = var.kafka_service_user
+      cluster_id                       = local.kafka_cluster_id
+      default_replication_factor       = var.kafka_default_replication_factor
+      min_insync_replicas              = var.kafka_min_insync_replicas
+      node_id                          = each.key
+      offsets_topic_replication_factor = var.kafka_offsets_topic_replication_factor
+      rack_id                          = each.value.availability_zone
     })
     merge_type = var.user_data_merge_strategy
   }

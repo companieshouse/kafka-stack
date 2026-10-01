@@ -41,7 +41,7 @@ variable "environment" {
 
 variable "instance_specifications" {
   description = "A map of specifications for the instances"
-  type = map(map(map(string)))
+  type        = map(map(map(string)))
 
   validation {
     condition = (
@@ -64,13 +64,13 @@ variable "instance_template_path" {
 
 variable "kafka_broker_access" {
   default = {
-    cidr_blocks: [],
-    list_ids: [],
+    cidr_blocks : [],
+    list_ids : [],
   }
   description = "An object defining CIDR blocks and prefix list ids controlling access to kafka brokers"
   type = object({
-    cidr_blocks: list(string),
-    list_ids: list(string),
+    cidr_blocks : list(string),
+    list_ids : list(string),
   })
 }
 
@@ -94,19 +94,25 @@ variable "kafka_kraft_port" {
 
 variable "kafka_kraft_access" {
   default = {
-    cidr_blocks: [],
-    list_ids: [],
+    cidr_blocks : [],
+    list_ids : [],
   }
   description = "An object defining CIDR blocks and prefix list ids controlling additional access to the KRaft controller listener"
   type = object({
-    cidr_blocks: list(string),
-    list_ids: list(string),
+    cidr_blocks : list(string),
+    list_ids : list(string),
   })
 }
 
 variable "kafka_min_insync_replicas" {
   default     = 2
   description = "The value for the min.insync.replicas Kafka property. See https://kafka.apache.org/31/documentation.html#brokerconfigs_min.insync.replicas"
+  type        = number
+}
+
+variable "kafka_default_replication_factor" {
+  default     = 3
+  description = "The default replication factor for Kafka topics"
   type        = number
 }
 
@@ -120,6 +126,35 @@ variable "kafka_port" {
   default     = 9092
   description = "The port on which kafka listens for clients"
   type        = number
+}
+
+variable "certificate_arn" {
+  default     = null
+  description = "The ARN of a pre-provisioned certificate for the Kafdrop load balancer; used when Route53 is not available"
+  type        = string
+}
+
+variable "kafdrop_access" {
+  default = {
+    cidr_blocks = [],
+    list_ids    = [],
+  }
+  description = "An object defining CIDR blocks and prefix list ids controlling access to the Kafdrop load balancer"
+  type = object({
+    cidr_blocks = list(string),
+    list_ids    = list(string),
+  })
+}
+
+variable "kafdrop_port" {
+  default     = 8082
+  description = "The port on which Kafdrop listens"
+  type        = number
+}
+
+variable "load_balancer_dns_zone_name" {
+  description = "The DNS zone name used for the Kafdrop load balancer record"
+  type        = string
 }
 
 variable "kafka_service_group" {
@@ -137,10 +172,10 @@ variable "kafka_service_user" {
 variable "lvm_block_definitions" {
   description = "LVM block definitions"
   type = list(object({
-    aws_volume_size_gb: string,
-    filesystem_resize_tool: string,
-    lvm_logical_volume_device_node: string,
-    lvm_physical_volume_device_node: string,
+    aws_volume_size_gb : string,
+    filesystem_resize_tool : string,
+    lvm_logical_volume_device_node : string,
+    lvm_physical_volume_device_node : string,
   }))
 
   validation {
@@ -165,13 +200,13 @@ variable "ns_update_key_path" {
 
 variable "prometheus_access" {
   default = {
-    cidr_blocks: [],
-    list_ids: [],
+    cidr_blocks : [],
+    list_ids : [],
   }
   description = "An object defining CIDR blocks and prefix list ids controlling access to Prometheus"
   type = object({
-    cidr_blocks: list(string),
-    list_ids: list(string),
+    cidr_blocks : list(string),
+    list_ids : list(string),
   })
 }
 
@@ -209,13 +244,7 @@ variable "ssm_kms_key" {
 
 variable "subnets" {
   description = "A map of subnets keyed by availability zone"
-  type = map
-}
-
-variable "stub_plan_mode" {
-  default     = false
-  description = "When true, skips AMI lookup and broker/resource creation for wiring-only plan validation"
-  type        = bool
+  type        = map(any)
 }
 
 variable "team" {

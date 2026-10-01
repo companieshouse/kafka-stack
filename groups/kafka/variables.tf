@@ -33,8 +33,8 @@ variable "environment" {
 }
 
 variable "default_ami_version_pattern" {
-  default = "4.2.*"
-  description = "The default AMI version pattern to use when matching AMIs for instances"
+  default     = "4.2.*"
+  description = "The default Kafka 4.2 AMI version pattern to use when matching AMIs for instances"
   type        = string
 }
 
@@ -46,24 +46,24 @@ variable "default_instance_type" {
 
 variable "instance_specifications" {
   description = "A map of specifications for the instances"
-  type = map(map(map(string)))
+  type        = map(map(map(string)))
 }
 
 variable "lvm_block_definitions" {
   default = [
     {
-      aws_volume_size_gb: "50",
-      filesystem_resize_tool: "xfs_growfs",
-      lvm_logical_volume_device_node: "/dev/kafka/data",
-      lvm_physical_volume_device_node: "/dev/xvdb"
+      aws_volume_size_gb : "50",
+      filesystem_resize_tool : "xfs_growfs",
+      lvm_logical_volume_device_node : "/dev/kafka/data",
+      lvm_physical_volume_device_node : "/dev/xvdb"
     }
   ]
   description = "Kafka LVM block definitions"
   type = list(object({
-    aws_volume_size_gb: string,
-    filesystem_resize_tool: string,
-    lvm_logical_volume_device_node: string,
-    lvm_physical_volume_device_node: string,
+    aws_volume_size_gb : string,
+    filesystem_resize_tool : string,
+    lvm_logical_volume_device_node : string,
+    lvm_physical_volume_device_node : string,
   }))
 }
 
@@ -90,15 +90,9 @@ variable "route53_available" {
 }
 
 variable "service" {
-  default     = "kafka3"
+  default     = "kafka4-streaming"
   description = "The service name to be used when creating AWS resources"
   type        = string
-}
-
-variable "stub_plan_mode" {
-  default     = false
-  description = "When true, runs a wiring-only plan and skips AMI-dependent broker provisioning"
-  type        = bool
 }
 
 variable "team" {

@@ -1,0 +1,30 @@
+[1;34mInfo:[0m Validating AWS CLI version
+[1;34mInfo:[0m Attempting to validate ECR login
+[1;34mInfo:[0m Docker login succeeded
+[1;34mInfo:[0m Local plugin cache enabled: [/Users/sgopi/.tfrun_plugin_cache]
+[1;34mInfo:[0m Using variable: VAULT_ADDR
+[1;34mInfo:[0m Attempting to pull latest image from ECR
+latest: Pulling from terraform-runner-multi
+Digest: sha256:08786b153a18b2d96aff44d05d456d6a7548aba41a9775e78ead3d0f51debffe
+Status: Image is up to date for 169942020521.dkr.ecr.eu-west-2.amazonaws.com/terraform-runner-multi:latest
+169942020521.dkr.ecr.eu-west-2.amazonaws.com/terraform-runner-multi:latest
+[1;34mInfo:[0m Preparing terraform environment
+[0;31mError:[0m Unexpected option: -out
+[1;34mInfo:[0m Usage:
+[1;34mInfo:[0m   run-terraform [OPTIONS] -- [TERRAFORM_OPTIONS]
+[1;34mInfo:[0m 
+[1;34mInfo:[0m Options:
+[1;34mInfo:[0m   -c,      --command               Terraform command (supported commands: apply destroy import plan refresh state)
+[1;34mInfo:[0m   -dr,     --dependency-rewrite    Optional; Forces an existing provider dependency lock file to be rewritten
+[1;34mInfo:[0m   -du,     --dependency-upgrade    Optional; Allow providers in the dependency lock to be upgraded
+[1;34mInfo:[0m   -e,      --environment           Optional environment name; omit when applying common account-level changes
+[1;34mInfo:[0m   -g,      --group                 Terraform source code group directory name
+[1;34mInfo:[0m   -h,      --help                  Show this help message
+[1;34mInfo:[0m   -p,      --profile               The AWS Command Line Interface profile name
+[1;34mInfo:[0m   -sb,     --state-bucket          Optional state bucket; the default is recommended
+[1;34mInfo:[0m   -sbp,    --state-bucket-path     Optional path within the state bucket; the default is recommended
+[1;34mInfo:[0m   -t,      --terraform-root        Optional path to subdirectory containing Terraform code relative to top-level of git working tree
+[1;34mInfo:[0m 
+[1;34mInfo:[0m Terraform options:
+[1;34mInfo:[0m   Options passed to Terraform command; see 'terraform <command> --help' for valid options.
+[1;34mInfo:[0m Syncing pending changes back to user

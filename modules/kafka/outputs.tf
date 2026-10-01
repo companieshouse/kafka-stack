@@ -3,6 +3,11 @@ output "brokers" {
   value       = formatlist("%s:${var.kafka_port}", values(local.instance_definitions).*.hostname)
 }
 
+output "kafdrop_url" {
+  description = "The URL of the Kafdrop UI"
+  value       = "https://${local.kafdrop_load_balancer_dns_name}"
+}
+
 output "instance_ips" {
   description = "The ips of the provisioned hosts"
   value       = values(aws_instance.kafkas).*.private_ip
@@ -10,7 +15,7 @@ output "instance_ips" {
 
 output "instance_profile" {
   description = "The IAM instance profile used by Kafka brokers"
-  value       = var.stub_plan_mode ? null : module.instance_profile[0].aws_iam_instance_profile.name
+  value       = module.instance_profile.aws_iam_instance_profile.name
 }
 
 output "debug" {

@@ -11,7 +11,4 @@ runcmd:
   %{ if update_nameserver }
   - nsupdate.sh
   %{ endif }
-  - systemctl enable kafka
-  - systemctl start kafka
-  - systemctl enable prometheus-kafka-exporter
-  - systemctl start prometheus-kafka-exporter
+  - systemctl daemon-reload
