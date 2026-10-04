@@ -35,9 +35,9 @@ write_files:
                 - name: tag:Environment
                   values: [${environment}]
                 - name: tag:Service
-                  values: [kafka3]
+                  values: [kafka3, kafka4-streaming]
                 - name: tag:ServiceSubType
-                  values: [kafka]
+                  values: [kafka, broker]
           relabel_configs:
             - source_labels: [__meta_ec2_tag_HostName]
               target_label: hostname
@@ -58,9 +58,9 @@ write_files:
                 - name: tag:Environment
                   values: [${environment}]
                 - name: tag:Service
-                  values: [kafka3]
+                  values: [kafka3, kafka4-streaming]
                 - name: tag:ServiceSubType
-                  values: [kafka]
+                  values: [kafka, broker]
           relabel_configs:
             - source_labels: [__meta_ec2_tag_HostName]
               target_label: hostname

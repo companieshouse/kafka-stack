@@ -8,32 +8,6 @@ data "aws_ec2_managed_prefix_list" "automation" {
   name = "shared-services-management-cidrs"
 }
 
-data "aws_instance" "zookeepers" {
-  for_each = toset(data.aws_instances.zookeepers.ids)
-
-  instance_id = each.value
-}
-
-data "aws_instances" "zookeepers" {
-  instance_tags = {
-    Environment     = var.environment
-    Service         = var.service
-    ServiceSubType  = "zookeeper"
-  }
-}
-
-data "aws_key_pair" "kafka_stack" {
-  filter {
-    name   = "tag:Environment"
-    values = [var.environment]
-  }
-
-  filter {
-    name   = "tag:Service"
-    values = [var.service]
-  }
-}
-
 data "vault_generic_secret" "account_ids" {
   path = "aws-accounts/account-ids"
 }
